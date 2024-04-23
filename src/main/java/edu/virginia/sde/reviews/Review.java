@@ -17,10 +17,10 @@ public class Review {
     private User user;
     private Course course;
     private String reviewComment;
-    private int rating;
+    private double rating;
     private Timestamp timestamp;
 
-    public Review(User user, Course course, String reviewComment, int rating, Timestamp timestamp) {
+    public Review(User user, Course course, String reviewComment, double rating, Timestamp timestamp) {
         this.user = user;
         this.course = course;
         this.reviewComment = reviewComment;
@@ -52,7 +52,7 @@ public class Review {
         this.reviewComment = comment;
     }
 
-    public int getRating() {
+    public double getRating() {
         return rating;
     }
 
