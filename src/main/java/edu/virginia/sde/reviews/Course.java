@@ -15,14 +15,21 @@ public class Course {
     private int courseNumber;
     private String mnemonic;
     private String title;
-    private int averageRating;
+    private double averageRating;
 
-    public Course(int id, int courseNumber, String mnemonic, String title, int averageRating) {
+    public Course(int id, int courseNumber, String mnemonic, String title, double averageRating) {
         this.id = id;
         this.courseNumber = courseNumber;
         this.mnemonic = mnemonic;
         this.title = title;
         this.averageRating = averageRating;
+    }
+    public Course(int id, int courseNumber, String mnemonic, String title) {
+        this.id = id;
+        this.courseNumber = courseNumber;
+        this.mnemonic = mnemonic;
+        this.title = title;
+        this.averageRating = 0.0;
     }
 
     public int getId() {
@@ -57,7 +64,7 @@ public class Course {
         this.title = title;
     }
 
-    public int getAverageRating() {
+    public double getAverageRating() {
         return averageRating;
     }
 
