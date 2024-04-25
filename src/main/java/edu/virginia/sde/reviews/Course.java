@@ -32,6 +32,8 @@ public class Course {
         this.averageRating = 0.0;
     }
 
+    public Course() { }
+
     public int getId() {
         return id;
     }
@@ -68,7 +70,7 @@ public class Course {
         return averageRating;
     }
 
-    public void setAverageRating(int averageRating) {
+    public void setAverageRating(double averageRating) {
         this.averageRating = averageRating;
     }
 
