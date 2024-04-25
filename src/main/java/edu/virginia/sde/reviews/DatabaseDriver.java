@@ -173,11 +173,12 @@ public class DatabaseDriver {
 
                 String reviewComment = resultSet.getString("Comment");
                 double rating = resultSet.getDouble("Rating");
-
+                Timestamp timestamp = resultSet.getTimestamp("Stamp");
                 review.setUser(reviewer);
                 review.setCourse(course);
                 review.setComment(reviewComment);
                 review.setRating(rating);
+                review.setTimestamp(timestamp);
                 reviewsList.add(review);
             }
             return reviewsList;
