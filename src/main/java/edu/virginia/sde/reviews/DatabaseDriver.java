@@ -58,6 +58,13 @@ public class DatabaseDriver {
         query = "CREATE TABLE IF NOT ALREADY EXISTS REVIEWS(ID INTEGER PRIMARY KEY autoincrement, UserID INTEGER, CourseID INTEGER, Rating REAL, Comment TEXT, Stamp TIMESTAMP, Foreign Key(UserID) REFERENCES USERS(ID), Foreign Key (CoursesID) REFERENCES Courses(ID))";
         statement.executeQuery(query);
     }
+    public void clearTables() throws SQLException {
+        Statement sqlStatement = connection.createStatement();
+        sqlStatement.addBatch("DELETE FROM USERS");
+        sqlStatement.addBatch("DELETE FROM COURSES");
+        sqlStatement.addBatch("DELETE FROM REVIEWS");
+        sqlStatement.executeBatch();
+    }
 
     public void addCourse(Course course) throws SQLException {
         Statement statement = connection.createStatement();
