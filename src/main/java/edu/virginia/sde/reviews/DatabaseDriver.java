@@ -209,14 +209,6 @@ public class DatabaseDriver {
         }
         return null;
     }
-
-    /***
-     * gets a very specific review from the database
-     */
-    public Review getReviewByID(Review review){
-        return null;
-    }
-
     /***
      * Delete a review from the list
      * @param review
