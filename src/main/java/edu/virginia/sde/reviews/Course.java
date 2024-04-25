@@ -17,15 +17,15 @@ public class Course {
     private String title;
     private double averageRating;
 
-    public Course(int id, int courseNumber, String mnemonic, String title, double averageRating) {
-        this.id = id;
+    public Course(int courseNumber, String mnemonic, String title, double averageRating) {
+        this.id = -999;
         this.courseNumber = courseNumber;
         this.mnemonic = mnemonic;
         this.title = title;
         this.averageRating = averageRating;
     }
-    public Course(int id, int courseNumber, String mnemonic, String title) {
-        this.id = id;
+    public Course(int courseNumber, String mnemonic, String title) {
+        //this.id = id;
         this.courseNumber = courseNumber;
         this.mnemonic = mnemonic;
         this.title = title;

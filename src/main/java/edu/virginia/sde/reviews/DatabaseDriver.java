@@ -52,9 +52,9 @@ public class DatabaseDriver {
 
     public void createTables() throws SQLException {
         Statement statement = connection.createStatement();
-        String query = "CREATE TABLE IF NOT ALREADY EXISTS USERS(ID INTEGER PRIMARY KEY, Username TEXT, PASSWORD TEXT)";
+        String query = "CREATE TABLE IF NOT ALREADY EXISTS USERS(ID INTEGER PRIMARY KEY autoincrement, Username TEXT, PASSWORD TEXT)";
         statement.executeQuery(query);
-        query = "CREATE TABLE IF NOT ALREADY EXISTS COURSES(ID INTEGER PRIMARY KEY, CourseNumber INTEGER, Mnemonic TEXT, Title TEXT, Rating REAL)";
+        query = "CREATE TABLE IF NOT ALREADY EXISTS COURSES(ID INTEGER PRIMARY KEY autoincrement, CourseNumber INTEGER, Mnemonic TEXT, Title TEXT, Rating REAL)";
         statement.executeQuery(query);
         query = "CREATE TABLE IF NOT ALREADY EXISTS REVIEWS(ID INTEGER PRIMARY KEY autoincrement, UserID INTEGER, CourseID INTEGER, Rating REAL, Comment TEXT, Stamp TIMESTAMP, Foreign Key(UserID) REFERENCES USERS(ID), Foreign Key (CoursesID) REFERENCES Courses(ID))";
         statement.executeQuery(query);
@@ -73,9 +73,13 @@ public class DatabaseDriver {
         ResultSet result = statement.executeQuery(query);
         if (result.wasNull()) {
             query = String.format("""
-                    INSERT INTO COURSES(ID, CourseNumber, Mnemonic, Title, Rating) values (%d, %d, %s %s %f)
-                    """, course.getId(), course.getCourseNumber(), course.getMnemonic(), course.getTitle(), course.getAverageRating());
+                    INSERT INTO COURSES(CourseNumber, Mnemonic, Title, Rating) values (%d, %s %s %f)
+                    """, course.getCourseNumber(), course.getMnemonic(), course.getTitle(), course.getAverageRating());
             statement.executeQuery(query);
+            ResultSet ID = statement.getGeneratedKeys();
+            if (ID.next()) {
+                course.setId(ID.getInt(1));
+            }
         }
     }
 
@@ -88,6 +92,10 @@ public class DatabaseDriver {
                     INSERT INTO USERS(Username, Password) values (%s, %s)
                     """, user.getPassword(), user.getPassword());
             statement.executeQuery(query);
+            ResultSet ID = statement.getGeneratedKeys();
+            if (ID.next()) {
+                user.setId(ID.getInt(1));
+            }
         }
     }
     public void addReview(Review review) throws SQLException {
@@ -99,6 +107,10 @@ public class DatabaseDriver {
                     INSERT INTO REVIEWS(UserID, CourseID, Rating, Comment, Stamp) values(%d, %d, %f, %s, %o)
                     """, review.getUser().getId(), review.getCourse().getId(), review.getRating(), review.getComment(), review.getTimestamp().getTime());
             statement.executeQuery(query);
+            ResultSet ID = statement.getGeneratedKeys();
+            if (ID.next()) {
+                review.setId(ID.getInt(1));
+            }
         }
     }
 

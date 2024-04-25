@@ -13,7 +13,7 @@ public class Review {
      */
 
     //
-
+    private int id;
     private User user;
     private Course course;
     private String reviewComment;
@@ -26,6 +26,7 @@ public class Review {
         this.reviewComment = reviewComment;
         this.rating = rating;
         this.timestamp = timestamp;
+        this.id = -999;
     }
 
     public Review() { }
@@ -69,6 +70,8 @@ public class Review {
     public void setTimestamp(Timestamp timestamp) {
         this.timestamp = timestamp;
     }
+
+    public void setId(int id) {this.id = id;}
 
     @Override
     public String toString() {
