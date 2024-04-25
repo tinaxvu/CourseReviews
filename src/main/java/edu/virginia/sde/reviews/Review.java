@@ -28,6 +28,8 @@ public class Review {
         this.timestamp = timestamp;
     }
 
+    public Review() { }
+
     public User getUser() {
         return user;
     }
@@ -56,7 +58,7 @@ public class Review {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(double rating) {
         this.rating = rating;
     }
 
