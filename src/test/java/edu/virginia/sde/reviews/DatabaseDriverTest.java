@@ -10,12 +10,12 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DatabaseDriverTest {
-    DatabaseDriver databaseDriver = new DatabaseDriver("course_reviews");
+    DatabaseDriver databaseDriver = new DatabaseDriver("course_reviews.sqlite");
 
     User user1 = new User("username1","password123");
     Course Chem = new Course(101, "CHEM","Chemistry 101");
     Timestamp timestamp = new Timestamp(1159);
-    Review review = new Review(user1,Chem, "This class is fantastic!!", 4.5,timestamp);
+
 
 
     @BeforeEach
@@ -54,6 +54,9 @@ class DatabaseDriverTest {
     }
     @Test
     void addReviewTest() throws SQLException {
+        user1.setId(1);
+        Chem.setId(1);
+        Review review = new Review(user1,Chem, "This class is fantastic!!", 4.5,timestamp);
         databaseDriver.addReview(review);
         databaseDriver.commit();
         databaseDriver.disconnect();

@@ -73,10 +73,15 @@ public class DatabaseDriver {
             Statement statement = connection.createStatement();
             String query = String.format("SELECT * FROM COURSES WHERE CourseNumber = %d and Mnemonic = '%s' and Title = '%s'", course.getCourseNumber(), course.getMnemonic(), course.getTitle());
             ResultSet result = statement.executeQuery(query);
-            if (result.wasNull()) {// error with this
-                query = String.format("INSERT INTO COURSES (CourseNumber, Mnemonic, Title, Rating) VALUES (%d, %s, %s, %f)", course.getCourseNumber(), course.getMnemonic(), course.getTitle(), course.getAverageRating());
-                statement.executeUpdate(query);
-                ResultSet ID = statement.getGeneratedKeys();
+            if (!result.next()) {// error with this
+                PreparedStatement ps = connection.prepareStatement("INSERT INTO COURSES (CourseNumber, Mnemonic, Title, Rating) VALUES (?, ?, ?, ?)");
+                ps.setInt(1, course.getCourseNumber());
+                ps.setString(2, course.getMnemonic());
+                ps.setString(3, course.getTitle());
+                ps.setDouble(4, course.getAverageRating());
+                ps.execute();
+                PreparedStatement ps2 = connection.prepareStatement("SELECT last_insert_rowid()");
+                ResultSet ID = ps2.executeQuery();
                 if (ID.next()) {//error with this
                     course.setId(ID.getInt(1));
                 }
@@ -89,15 +94,16 @@ public class DatabaseDriver {
             Statement statement = connection.createStatement();
             String query = String.format("Select * FROM USERS WHERE Username = '%s'", user.getUsername());
             ResultSet result = statement.executeQuery(query);
-            if (result == null) {
-                query = String.format("""
-                    INSERT INTO USERS(Username, Password) values ('%s', '%s')
-                    """, user.getUsername(), user.getPassword());
-                statement.executeUpdate(query);
-                ResultSet ID = statement.getGeneratedKeys();
-                if (ID.next()) {
+            if (!result.next()) {
+               PreparedStatement ps = connection.prepareStatement("INSERT INTO USERS (Username, Password) VALUES (?, ?)");
+               ps.setString(1, user.getUsername());
+               ps.setString(2, user.getPassword());
+               ps.execute();
+               PreparedStatement ps2 = connection.prepareStatement("SELECT last_insert_rowid()");
+               ResultSet ID = ps2.executeQuery();
+               if (ID.next()) {
                     user.setId(ID.getInt(1));
-                }
+               }
             }
         }
     }
@@ -106,12 +112,16 @@ public class DatabaseDriver {
             Statement statement = connection.createStatement();
             String query = String.format("SELECT * FROM REVIEWS WHERE UserID = %d and CourseID = %d", review.getUser().getId(), review.getCourse().getId());
             ResultSet result = statement.executeQuery(query);
-            if(result.wasNull()){
-                query = String.format("""
-                    INSERT INTO REVIEWS(UserID, CourseID, Comment, Rating, Stamp) values(%d, %d, %f, %s, %o)
-                    """, review.getUser().getId(), review.getCourse().getId(), review.getRating(), review.getComment(), review.getTimestamp().getTime());
-                statement.executeQuery(query);
-                ResultSet ID = statement.getGeneratedKeys();
+            if(!result.next()){
+                PreparedStatement ps = connection.prepareStatement("INSERT INTO REVIEWS(UserID, CourseID, Comment, Rating, Stamp) values(?,?,?,?,?)");
+                ps.setInt(1, review.getUser().getId());
+                ps.setInt(2, review.getCourse().getId());
+                ps.setString(3, review.getComment());
+                ps.setDouble(4, review.getRating());
+                ps.setTimestamp(5, review.getTimestamp());
+                ps.execute();
+                PreparedStatement ps2 = connection.prepareStatement("SELECT last_insert_rowid()");
+                ResultSet ID = ps2.executeQuery();
                 if (ID.next()) {
                     review.setId(ID.getInt(1));
                 }
