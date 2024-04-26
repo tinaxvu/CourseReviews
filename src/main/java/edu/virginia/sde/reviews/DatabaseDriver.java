@@ -89,16 +89,16 @@ public class DatabaseDriver {
             Statement statement = connection.createStatement();
             String query = String.format("Select * FROM USERS WHERE Username = '%s'", user.getUsername());
             ResultSet result = statement.executeQuery(query);
-            //if (result == null) {
+            if (result == null) {
                 query = String.format("""
                     INSERT INTO USERS(Username, Password) values ('%s', '%s')
                     """, user.getUsername(), user.getPassword());
                 statement.executeUpdate(query);
-//                ResultSet ID = statement.getGeneratedKeys();
-//                if (ID.next()) {
-//                    user.setId(ID.getInt(1));
-//                }
-            //}
+                ResultSet ID = statement.getGeneratedKeys();
+                if (ID.next()) {
+                    user.setId(ID.getInt(1));
+                }
+            }
         }
     }
     public void addReview(Review review) throws SQLException {
