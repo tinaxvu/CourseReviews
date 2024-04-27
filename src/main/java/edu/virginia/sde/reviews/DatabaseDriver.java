@@ -62,9 +62,10 @@ public class DatabaseDriver {
     }
     public void clearTables() throws SQLException {
         Statement sqlStatement = connection.createStatement();
+        sqlStatement.addBatch("DELETE FROM REVIEWS");
+        sqlStatement.executeBatch();
         sqlStatement.addBatch("DELETE FROM USERS");
         sqlStatement.addBatch("DELETE FROM COURSES");
-        sqlStatement.addBatch("DELETE FROM REVIEWS");
         sqlStatement.executeBatch();
     }
 

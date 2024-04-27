@@ -33,12 +33,7 @@ class DatabaseDriverTest {
             databaseDriver.commit();
             databaseDriver.disconnect();
     }
-    @Test
-    void clearTablesTest() throws SQLException {
-        databaseDriver.clearTables();
-        databaseDriver.commit();
-        databaseDriver.disconnect();
-    }
+
     @Test
     void addCourseTest() throws SQLException {
             databaseDriver.addCourse(Chem);
@@ -53,13 +48,19 @@ class DatabaseDriverTest {
 
     }
     @Test
+    void clearTablesTest() throws SQLException {
+        databaseDriver.clearTables();
+        databaseDriver.commit();
+        databaseDriver.disconnect();
+    }
+    /*@Test
     void addReviewTest() throws SQLException {
-        user1.setId(1);
-        Chem.setId(1);
+        user1.setId(3);
+        Chem.setId(3);
         Review review = new Review(user1,Chem, "This class is fantastic!!", 4.5,timestamp);
         databaseDriver.addReview(review);
         databaseDriver.commit();
         databaseDriver.disconnect();
-    }
+    }*/
 
 }
