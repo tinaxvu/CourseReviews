@@ -26,7 +26,7 @@ public class LoginSceneController {
 
     public void initialize() {
         // Initialize DatabaseDriver instance
-        databaseDriver = new DatabaseDriver("your_database_file.db");
+        databaseDriver = new DatabaseDriver("course_reviews.sqlite");
     }
 
     @FXML
