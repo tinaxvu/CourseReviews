@@ -58,9 +58,11 @@ public class LoginSceneController {
         String username = usernameField.getText();
         String password = passwordField.getText();
         try {
-            if (!usernameExists(username) && isPasswordValid(password)) {
+            if (isPasswordValid(password)) {
                 User newUser = new User(username, password);
+                databaseDriver.connect();
                 databaseDriver.addUser(newUser);
+                databaseDriver.commit();
                 successLabel.setText("User created successfully");
                 successLabel.setVisible(true);
                 errorLabel.setVisible(false);
@@ -78,6 +80,7 @@ public class LoginSceneController {
     }
 
     private boolean isValidCredentials(String username, String password) throws SQLException {
+        databaseDriver.connect();
         User user = databaseDriver.getUserByUsername(username);
         if (user != null) {
             return user.getPassword().equals(password);
@@ -86,6 +89,7 @@ public class LoginSceneController {
     }
 
     private boolean usernameExists(String username) throws SQLException {
+        databaseDriver.connect();
         User user = databaseDriver.getUserByUsername(username);
         return user != null;
     }

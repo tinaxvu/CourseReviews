@@ -105,6 +105,8 @@ public class DatabaseDriver {
                if (ID.next()) {
                     user.setId(ID.getInt(1));
                }
+            }else{
+                throw new SQLException("User already exists");
             }
         }
     }
