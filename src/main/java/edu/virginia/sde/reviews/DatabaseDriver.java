@@ -169,50 +169,26 @@ public class DatabaseDriver {
 
             List<Review> reviewsList = new ArrayList<>();
             Review review = new Review();
-            User reviewer = new User();
             Course course = new Course();
 
             while (resultSet.next()) {
-                PreparedStatement ps2 = connection.prepareStatement("SELECT * FROM USERS WHERE ID = ?");
-                ps2.setInt(1, resultSet.getInt("UserID"));
-                ResultSet userResultSet = ps2.executeQuery();
-
-                if (userResultSet.next()) {
-                    int id = userResultSet.getInt("ID");
-                    String username = userResultSet.getString("Username");
-                    String password = userResultSet.getString("PASSWORD");
-
-                    reviewer.setId(id);
-                    reviewer.setUsername(username);
-                    reviewer.setPassword(password);
-                }
-
                 PreparedStatement ps3 = connection.prepareStatement("SELECT * FROM COURSES WHERE ID = ?");
                 ps3.setInt(1, resultSet.getInt("CourseID"));
                 ResultSet courseResultSet = ps3.executeQuery();
 
-                if (courseResultSet.next()) {
-                    int id = courseResultSet.getInt("ID");
-                    int courseNumber = courseResultSet.getInt("CourseNumber");
-                    String mnemonic = courseResultSet.getString("Mnemonic");
-                    String title = courseResultSet.getString("Title");
-                    double averageRating = courseResultSet.getDouble("Rating");
-
-                    course.setId(id);
-                    course.setCourseNumber(courseNumber);
-                    course.setMnemonic(mnemonic);
-                    course.setTitle(title);
-                    course.setAverageRating(averageRating);
+                while (courseResultSet.next()) {
+                    course.setId(courseResultSet.getInt("ID"));
+                    course.setCourseNumber(courseResultSet.getInt("CourseNumber"));
+                    course.setMnemonic(courseResultSet.getString("Mnemonic"));
+                    course.setTitle(courseResultSet.getString("Title"));
+                    course.setAverageRating(courseResultSet.getDouble("Rating"));
                 }
 
-                String reviewComment = resultSet.getString("Comment");
-                double rating = resultSet.getDouble("Rating");
-                Timestamp timestamp = resultSet.getTimestamp("Stamp");
-                review.setUser(reviewer);
+                review.setUser(user);
                 review.setCourse(course);
-                review.setComment(reviewComment);
-                review.setRating(rating);
-                review.setTimestamp(timestamp);
+                review.setComment(resultSet.getString("Comment"));
+                review.setRating(resultSet.getDouble("Rating"));
+                review.setTimestamp(resultSet.getTimestamp("Stamp"));
                 reviewsList.add(review);
             }
             return reviewsList;
@@ -223,8 +199,11 @@ public class DatabaseDriver {
      * Delete a review from the list
      * @param review
      */
-    public void deleteReview(Review review){
-
+    public void deleteReview(Review review) throws SQLException {
+        if (connection != null && !connection.isClosed()) {
+            PreparedStatement ps = connection.prepareStatement("DELETE FROM REVIEWS WHERE ID = ?");
+            ps.setInt(1, review.getId());
+        }
     }
     /***
      * Delete a course from the list. Must also remove all reviews from reviews
