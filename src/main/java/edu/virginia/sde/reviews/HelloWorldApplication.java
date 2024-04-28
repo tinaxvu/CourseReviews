@@ -12,9 +12,9 @@ public class HelloWorldApplication extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("hello-world.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("login-scene.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Hello World");
+        stage.setTitle("Login");
         stage.setScene(scene);
         stage.show();
     }
