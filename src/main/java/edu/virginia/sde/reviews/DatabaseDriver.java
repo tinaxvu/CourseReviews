@@ -176,7 +176,7 @@ public class DatabaseDriver {
                 ps3.setInt(1, resultSet.getInt("CourseID"));
                 ResultSet courseResultSet = ps3.executeQuery();
 
-                while (courseResultSet.next()) {
+                if (courseResultSet.next()) {
                     course.setId(courseResultSet.getInt("ID"));
                     course.setCourseNumber(courseResultSet.getInt("CourseNumber"));
                     course.setMnemonic(courseResultSet.getString("Mnemonic"));
@@ -223,8 +223,34 @@ public class DatabaseDriver {
      * get all the courses from the database
      * @return
      */
-    public List<Course> getCourses(){
-        return null;
+    public List<Course> getCourses() throws SQLException {
+        List<Course> courseList = new ArrayList<>();
+
+        if(connection != null && !connection.isClosed()){
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM COURSES");
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt("ID");
+                int courseNumber = resultSet.getInt("CourseNumber");
+                String mnemonic = resultSet.getString("Mnemonic");
+                String title = resultSet.getString("Title");
+
+                PreparedStatement ps = connection.prepareStatement("SELECT AVG(Rating) AS averageRating FROM REVIEWS WHERE CourseID = ?");
+                ps.setInt(1, resultSet.getInt(id));
+
+                ResultSet averageResultSet = ps.executeQuery();
+                double averageRating = 0.0;
+
+                if (averageResultSet.next()) {
+                    averageRating = averageResultSet.getDouble("averageRating");
+                }
+
+                Course course = new Course(courseNumber, mnemonic, title, averageRating);
+                courseList.add(course);
+            }
+        }
+        return courseList;
     }
 
     public List<Course> getCoursesByMnemonic(String mnemonic) throws SQLException {
