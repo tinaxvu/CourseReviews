@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -7,7 +6,8 @@
     <VBox spacing="10" alignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0">
         <TextField fx:id="usernameField" promptText="Username" maxWidth="200"/>
         <PasswordField fx:id="passwordField" promptText="Password" maxWidth="200"/>
-        <Label fx:id="errorLabel" textFill="red"/>
+        <Label fx:id="errorLabel" textFill="red" visible="false"/>
+        <Label fx:id="successLabel" textFill="green" visible="false"/>
         <Button text="Login" onAction="#handleLoginButton" maxWidth="100"/>
         <Button text="Create User" onAction="#handleCreateUserButton" maxWidth="100"/>
         <Button text="Close" onAction="#handleCloseButton" maxWidth="100"/>

@@ -1,13 +1,12 @@
 package edu.virginia.sde.reviews;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
+import javafx.scene.Scene;
+import javafx.fxml.FXMLLoader;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -22,10 +21,12 @@ public class LoginSceneController {
     @FXML
     private Label errorLabel;
 
+    @FXML
+    private Label successLabel;
+
     private DatabaseDriver databaseDriver;
 
     public void initialize() {
-        // Initialize DatabaseDriver instance
         databaseDriver = new DatabaseDriver("course_reviews.sqlite");
     }
 
@@ -33,17 +34,22 @@ public class LoginSceneController {
     private void handleLoginButton() {
         String username = usernameField.getText();
         String password = passwordField.getText();
-
         try {
-
             if (isValidCredentials(username, password)) {
                 navigateToCourseSearchScreen();
+                successLabel.setText("Login successful");
+                successLabel.setVisible(true);
+                errorLabel.setVisible(false);
             } else {
                 errorLabel.setText("Invalid username/password");
+                errorLabel.setVisible(true);
+                successLabel.setVisible(false);
             }
         } catch (SQLException e) {
             e.printStackTrace();
             errorLabel.setText("Database error");
+            errorLabel.setVisible(true);
+            successLabel.setVisible(false);
         }
     }
 
@@ -51,19 +57,23 @@ public class LoginSceneController {
     private void handleCreateUserButton() {
         String username = usernameField.getText();
         String password = passwordField.getText();
-
         try {
-
             if (!usernameExists(username) && isPasswordValid(password)) {
                 User newUser = new User(username, password);
                 databaseDriver.addUser(newUser);
-                errorLabel.setText("User created successfully");
+                successLabel.setText("User created successfully");
+                successLabel.setVisible(true);
+                errorLabel.setVisible(false);
             } else {
                 errorLabel.setText("Invalid username/password");
+                errorLabel.setVisible(true);
+                successLabel.setVisible(false);
             }
         } catch (SQLException e) {
             e.printStackTrace();
             errorLabel.setText("Database error");
+            errorLabel.setVisible(true);
+            successLabel.setVisible(false);
         }
     }
 
@@ -92,8 +102,6 @@ public class LoginSceneController {
             stage.setTitle("Course Search");
             stage.setScene(scene);
             stage.show();
-
-            // Close the login window
             Stage loginStage = (Stage) usernameField.getScene().getWindow();
             loginStage.close();
         } catch (IOException e) {
@@ -106,4 +114,5 @@ public class LoginSceneController {
         Stage stage = (Stage) usernameField.getScene().getWindow();
         stage.close();
     }
+
 }
