@@ -270,5 +270,23 @@ public class DatabaseDriver {
         return null;
     }
 
+    public User getUserByUsername(String username) throws SQLException {
+        if (connection != null && !connection.isClosed()) {
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM USERS WHERE Username = ?");
+            ps.setString(1, username);
+            ResultSet resultSet = ps.executeQuery();
+
+            if (resultSet.next()) {
+                User user = new User();
+                user.setId(resultSet.getInt("ID"));
+                user.setUsername(resultSet.getString("Username"));
+                user.setPassword(resultSet.getString("Password"));
+                return user;
+            }
+        }
+        return null;
+    }
+
+
 
 }
