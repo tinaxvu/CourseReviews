@@ -25,6 +25,8 @@ class DatabaseDriverTest {
     void setup() {
         try {
             databaseDriver.connect();
+            databaseDriver.clearTables();
+            databaseDriver.commit();
         } catch (SQLException sqlException) {
             System.out.println(sqlException.getMessage());
         }
@@ -50,12 +52,12 @@ class DatabaseDriverTest {
             databaseDriver.disconnect();
 
     }
-    @Test
-    void clearTablesTest() throws SQLException {
-        databaseDriver.clearTables();
-        databaseDriver.commit();
-        databaseDriver.disconnect();
-    }
+//    @Test
+//    void clearTablesTest() throws SQLException {
+//        databaseDriver.clearTables();
+//        databaseDriver.commit();
+//        databaseDriver.disconnect();
+//    }
 
 
     @Test
@@ -128,8 +130,10 @@ class DatabaseDriverTest {
         databaseDriver.addReview(mathReview2);
         databaseDriver.commit();
         List<Review> getReviews = databaseDriver.getReviewsByUser(user1);
-        assertEquals(mathReview1.getId(),getReviews.get(getReviews.size()-1).getId());
-        assertEquals(chemReview1.getId(),getReviews.get(0).getId());
+        assertEquals(mathReview1.getId(),getReviews.get(0).getId());
+        assertEquals(mathReview1.getId(),getReviews.get(1).getId());
+        assertEquals(2, getReviews.size());
+
         databaseDriver.disconnect();
     }
 

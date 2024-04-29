@@ -28,6 +28,14 @@ public class Review {
         this.timestamp = timestamp;
         this.id = -999;
     }
+    public Review(int id, User user, Course course, String reviewComment, double rating, Timestamp timestamp) {
+        this.user = user;
+        this.course = course;
+        this.reviewComment = reviewComment;
+        this.rating = rating;
+        this.timestamp = timestamp;
+        this.id = id;
+    }
 
     public Review() { }
 

@@ -151,7 +151,7 @@ public class DatabaseDriver {
                     user = new User(resultUser.getString("Username"), resultUser.getString("Password"));
                     user.setId(resultUser.getInt("UserID"));
                 }
-                reviews.add(new Review(user, course, result.getString("Comment"),  result.getDouble("Rating"), result.getTimestamp("Stamp")));
+                reviews.add(new Review(result.getInt("ID"),user, course, result.getString("Comment"),  result.getDouble("Rating"), result.getTimestamp("Stamp")));
             }
             return reviews;
         }
@@ -185,7 +185,7 @@ public class DatabaseDriver {
                     course.setTitle(courseResultSet.getString("Title"));
                     course.setAverageRating(courseResultSet.getDouble("Rating"));
                 }
-
+                review.setId(resultSet.getInt("ID"));
                 review.setUser(user);
                 review.setCourse(course);
                 review.setComment(resultSet.getString("Comment"));
