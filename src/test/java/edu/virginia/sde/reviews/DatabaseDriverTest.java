@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -16,7 +17,9 @@ class DatabaseDriverTest {
     Course Chem = new Course(101, "CHEM","Chemistry 101");
     Timestamp timestamp = new Timestamp(1159);
 
-
+    User user2 = new User("username2","password123");
+    Course math = new Course(101, "MATH","Mathematics 101");
+    Course english = new Course(101, "ENG","English 101");
 
     @BeforeEach
     void setup() {
@@ -53,14 +56,81 @@ class DatabaseDriverTest {
         databaseDriver.commit();
         databaseDriver.disconnect();
     }
-    /*@Test
+
+
+    @Test
     void addReviewTest() throws SQLException {
-        user1.setId(3);
-        Chem.setId(3);
+        databaseDriver.addUser(user1);
+        databaseDriver.addCourse(Chem);
         Review review = new Review(user1,Chem, "This class is fantastic!!", 4.5,timestamp);
         databaseDriver.addReview(review);
         databaseDriver.commit();
         databaseDriver.disconnect();
-    }*/
+    }
+
+    @Test
+    void getReviewByCourseTest() throws SQLException {
+        databaseDriver.addUser(user1);
+        databaseDriver.addCourse(Chem);
+        Review review = new Review(user1,Chem, "This class is fantastic!!", 4.5,timestamp);
+        databaseDriver.addReview(review);
+        databaseDriver.commit();
+        List<Review> getReviews = databaseDriver.getReviewsByCourse(Chem);
+        assertEquals(review.getId(),getReviews.get(0).getId());
+        databaseDriver.disconnect();
+    }
+    @Test
+    void getReviewByCourseMultipleTest() throws SQLException {
+        databaseDriver.addUser(user1);
+        databaseDriver.addUser(user2);
+        databaseDriver.addCourse(Chem);
+        databaseDriver.addCourse(math);
+        databaseDriver.addCourse(english);
+        Review chemReview1 = new Review(user1,Chem, "This class is fantastic!!", 4.5,timestamp);
+        Review chemReview2 = new Review(user2,Chem, "This class is bad!!", 2,timestamp);
+        Review mathReview1 = new Review(user1,math, "This class is so fun!!", 4,timestamp);
+        Review mathReview2 = new Review(user2,math, "This class is so boring!!", 1,timestamp);
+        databaseDriver.addReview(chemReview1);
+        databaseDriver.addReview(chemReview2);
+        databaseDriver.addReview(mathReview1);
+        databaseDriver.addReview(mathReview2);
+        databaseDriver.commit();
+        List<Review> getReviews = databaseDriver.getReviewsByCourse(Chem);
+        assertEquals(chemReview1.getId(),getReviews.get(0).getId());
+        assertEquals(chemReview2.getId(),getReviews.get(getReviews.size()-1).getId());
+        databaseDriver.disconnect();
+    }
+    @Test
+    void getReviewByUserTest() throws SQLException {
+        databaseDriver.addUser(user1);
+        databaseDriver.addCourse(Chem);
+        Review review = new Review(user1,Chem, "This class is fantastic!!", 4.5,timestamp);
+        databaseDriver.addReview(review);
+        databaseDriver.commit();
+        List<Review> getReviews = databaseDriver.getReviewsByUser(user1);
+        assertEquals(review.getId(),getReviews.get(0).getId());
+        databaseDriver.disconnect();
+    }
+    @Test
+    void getReviewByUserMultipleTest() throws SQLException {
+        databaseDriver.addUser(user1);
+        databaseDriver.addUser(user2);
+        databaseDriver.addCourse(Chem);
+        databaseDriver.addCourse(math);
+        databaseDriver.addCourse(english);
+        Review chemReview1 = new Review(user1,Chem, "This class is fantastic!!", 4.5,timestamp);
+        Review chemReview2 = new Review(user2,Chem, "This class is bad!!", 2,timestamp);
+        Review mathReview1 = new Review(user1,math, "This class is so fun!!", 4,timestamp);
+        Review mathReview2 = new Review(user2,math, "This class is so boring!!", 1,timestamp);
+        databaseDriver.addReview(chemReview1);
+        databaseDriver.addReview(chemReview2);
+        databaseDriver.addReview(mathReview1);
+        databaseDriver.addReview(mathReview2);
+        databaseDriver.commit();
+        List<Review> getReviews = databaseDriver.getReviewsByUser(user1);
+        assertEquals(mathReview1.getId(),getReviews.get(getReviews.size()-1).getId());
+        assertEquals(chemReview1.getId(),getReviews.get(0).getId());
+        databaseDriver.disconnect();
+    }
 
 }
