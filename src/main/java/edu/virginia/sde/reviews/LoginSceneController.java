@@ -26,8 +26,9 @@ public class LoginSceneController {
 
     private DatabaseDriver databaseDriver;
 
-    public void initialize() {
+    public void initialize() throws SQLException {
         databaseDriver = new DatabaseDriver("course_reviews.sqlite");
+        databaseDriver.connect();
     }
 
     @FXML
@@ -60,7 +61,6 @@ public class LoginSceneController {
         try {
             if (isPasswordValid(password)) {
                 User newUser = new User(username, password);
-                databaseDriver.connect();
                 databaseDriver.addUser(newUser);
                 databaseDriver.commit();
                 successLabel.setText("User created successfully");
@@ -80,7 +80,6 @@ public class LoginSceneController {
     }
 
     private boolean isValidCredentials(String username, String password) throws SQLException {
-        databaseDriver.connect();
         User user = databaseDriver.getUserByUsername(username);
         if (user != null) {
             return user.getPassword().equals(password);
@@ -89,7 +88,6 @@ public class LoginSceneController {
     }
 
     private boolean usernameExists(String username) throws SQLException {
-        databaseDriver.connect();
         User user = databaseDriver.getUserByUsername(username);
         return user != null;
     }
