@@ -1,15 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.virginia.sde.reviews.LoginSceneController">
-    <VBox spacing="10" alignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0">
-        <TextField fx:id="usernameField" promptText="Username" maxWidth="200"/>
-        <PasswordField fx:id="passwordField" promptText="Password" maxWidth="200"/>
-        <Label fx:id="errorLabel" textFill="red" visible="false"/>
-        <Label fx:id="successLabel" textFill="green" visible="false"/>
-        <Button text="Login" onAction="#handleLoginButton" maxWidth="100"/>
-        <Button text="Create User" onAction="#handleCreateUserButton" maxWidth="100"/>
-        <Button text="Close" onAction="#handleCloseButton" maxWidth="100"/>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.virginia.sde.reviews.LoginSceneController">
+    <VBox alignment="CENTER" layoutX="21.0" layoutY="-26.0" spacing="10" AnchorPane.bottomAnchor="26.0" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="-21.0" AnchorPane.topAnchor="-26.0">
+      <Label prefHeight="70.0" prefWidth="445.0" text="Course Reviews Login">
+         <font>
+            <Font name="Impact" size="48.0" />
+         </font>
+      </Label>
+      <BorderPane prefHeight="129.0" prefWidth="1280.0">
+         <bottom>
+            <Label prefHeight="27.0" prefWidth="49.0" text="Login" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="Kai Regular" size="18.0" />
+               </font>
+            </Label>
+         </bottom>
+      </BorderPane>
+        <TextField fx:id="usernameField" maxWidth="200" promptText="Username" />
+        <PasswordField fx:id="passwordField" maxWidth="200" promptText="Password" />
+        <Label fx:id="errorLabel" textFill="red" visible="false" />
+        <Label fx:id="successLabel" textFill="green" visible="false" />
+        <Button maxWidth="100" onAction="#handleLoginButton" text="Login" />
+        <Button maxWidth="100" onAction="#handleCreateUserButton" text="Create User" />
+        <Button maxWidth="100" onAction="#handleCloseButton" text="Close" />
     </VBox>
 </AnchorPane>
