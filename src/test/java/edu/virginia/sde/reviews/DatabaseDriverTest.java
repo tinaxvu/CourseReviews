@@ -185,5 +185,27 @@ class DatabaseDriverTest {
         assertEquals(1, courses.size());
         databaseDriver.disconnect();
     }
+    @Test
+    void getCoursesTest() throws SQLException {
+        databaseDriver.addCourse(Chem);
+        databaseDriver.addCourse(math);
+        databaseDriver.addCourse(english);
+        databaseDriver.commit();
+        List<Course> courses= databaseDriver.getCourses();
+        assertEquals(Chem.getId(),courses.get(0).getId());
+        assertEquals(math.getId(),courses.get(1).getId());
+        assertEquals(english.getId(),courses.get(2).getId());
+        assertEquals(3, courses.size());
+        databaseDriver.disconnect();
+    }
+    @Test
+    void getUserbyUsernameTest() throws SQLException {
+        databaseDriver.addUser(user1);
+        databaseDriver.addUser(user2);
+        databaseDriver.commit();
+        User user = databaseDriver.getUserByUsername("username2");
+        assertEquals(user2.getId(),user.getId());
+        databaseDriver.disconnect();
+    }
 
 }
