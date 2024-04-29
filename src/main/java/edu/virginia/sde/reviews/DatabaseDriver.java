@@ -266,7 +266,7 @@ public class DatabaseDriver {
                     averageRating = averageResultSet.getDouble("averageRating");
                 }
 
-                Course course = new Course(courseNumber, mnemonic, title, averageRating);
+                Course course = new Course(id,courseNumber, mnemonic, title, averageRating);
                 courseList.add(course);
             }
         }

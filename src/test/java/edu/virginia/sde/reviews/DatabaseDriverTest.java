@@ -136,5 +136,54 @@ class DatabaseDriverTest {
 
         databaseDriver.disconnect();
     }
+    @Test
+    void deleteUserTest() throws SQLException {
+        databaseDriver.addUser(user1);
+        databaseDriver.addUser(user2);
+        databaseDriver.deleteUser(user1);
+        databaseDriver.commit();
+        databaseDriver.disconnect();
+    }
+
+    @Test
+    void deleteCourseTest() throws SQLException {
+        databaseDriver.addCourse(Chem);
+        databaseDriver.addCourse(math);
+        databaseDriver.addCourse(english);
+        databaseDriver.deleteCourse(math);
+        databaseDriver.commit();
+        databaseDriver.disconnect();
+    }
+    @Test
+    void deleteReviewTest() throws SQLException {
+        databaseDriver.addUser(user1);
+        databaseDriver.addUser(user2);
+        databaseDriver.addCourse(Chem);
+        databaseDriver.addCourse(math);
+        databaseDriver.addCourse(english);
+        Review chemReview1 = new Review(user1,Chem, "This class is fantastic!!", 4.5,timestamp);
+        Review chemReview2 = new Review(user2,Chem, "This class is bad!!", 2,timestamp);
+        Review mathReview1 = new Review(user1,math, "This class is so fun!!", 4,timestamp);
+        Review mathReview2 = new Review(user2,math, "This class is so boring!!", 1,timestamp);
+        databaseDriver.addReview(chemReview1);
+        databaseDriver.addReview(chemReview2);
+        databaseDriver.addReview(mathReview1);
+        databaseDriver.addReview(mathReview2);
+        databaseDriver.deleteReview(mathReview1);
+        databaseDriver.deleteReview(chemReview2);
+        databaseDriver.commit();
+        databaseDriver.disconnect();
+    }
+    @Test
+    void getCoursesByMnemonicTest() throws SQLException {
+        databaseDriver.addCourse(Chem);
+        databaseDriver.addCourse(math);
+        databaseDriver.addCourse(english);
+        databaseDriver.commit();
+        List<Course> courses= databaseDriver.getCoursesByMnemonic("ENG");
+        assertEquals(english.getId(),courses.get(0).getId());
+        assertEquals(1, courses.size());
+        databaseDriver.disconnect();
+    }
 
 }
