@@ -174,9 +174,9 @@ public class DatabaseDriver {
             Course course = new Course();
 
             while (resultSet.next()) {
-                PreparedStatement ps3 = connection.prepareStatement("SELECT * FROM COURSES WHERE ID = ?");
-                ps3.setInt(1, resultSet.getInt("CourseID"));
-                ResultSet courseResultSet = ps3.executeQuery();
+                PreparedStatement ps2 = connection.prepareStatement("SELECT * FROM COURSES WHERE ID = ?");
+                ps2.setInt(1, resultSet.getInt("CourseID"));
+                ResultSet courseResultSet = ps2.executeQuery();
 
                 if (courseResultSet.next()) {
                     course.setId(courseResultSet.getInt("ID"));
@@ -205,20 +205,38 @@ public class DatabaseDriver {
         if (connection != null && !connection.isClosed()) {
             PreparedStatement ps = connection.prepareStatement("DELETE FROM REVIEWS WHERE ID = ?");
             ps.setInt(1, review.getId());
+
+            ps.executeUpdate();
         }
     }
     /***
      * Delete a course from the list. Must also remove all reviews from reviews
      */
-    public void deleteCourse(Course course){
+    public void deleteCourse(Course course) throws SQLException {
+        if (connection != null && !connection.isClosed()) {
+            PreparedStatement ps = connection.prepareStatement("DELETE FROM REVIEWS WHERE CourseID = ?");
+            ps.setInt(1, course.getId());
+            ps.executeUpdate();
 
+            PreparedStatement ps1 = connection.prepareStatement("DELETE FROM COURSES WHERE ID = ?");
+            ps1.setInt(1, course.getId());
+            ps1.executeUpdate();
+        }
     }
 
     /***
      * Delete a User from the database
      */
-    public void deleteUser(User user){
+    public void deleteUser(User user) throws SQLException {
+        if (connection != null && !connection.isClosed()) {
+            PreparedStatement ps = connection.prepareStatement("DELETE FROM REVIEWS WHERE UserID = ?");
+            ps.setInt(1, user.getId());
+            ps.executeUpdate();
 
+            PreparedStatement ps1 = connection.prepareStatement("DELETE FROM USERS WHERE ID = ?");
+            ps1.setInt(1, user.getId());
+            ps1.executeUpdate();
+        }
     }
 
     /***
