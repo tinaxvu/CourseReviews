@@ -3,11 +3,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.virginia.sde.reviews.CourseReviewsSceneController">
+<AnchorPane prefHeight="530.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.virginia.sde.reviews.CourseReviewsSceneController">
    <children>
-      <TextArea fx:id="reviewTextArea" layoutX="231.0" layoutY="116.0" prefHeight="66.0" prefWidth="138.0" promptText="Add a review..." />
-      <TextField fx:id="ratingTextField" layoutX="231.0" layoutY="187.0" prefHeight="26.0" prefWidth="138.0" promptText="Rating 1-5" />
-      <Button fx:id="addReviewButton" layoutX="234.0" layoutY="220.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="132.0" text="Add my rating" />
+      <TextArea fx:id="reviewTextArea" layoutX="244.0" layoutY="116.0" prefHeight="66.0" prefWidth="386.0" promptText="Add a review..." />
+      <TextField fx:id="ratingTextField" layoutX="246.0" layoutY="187.0" prefHeight="26.0" prefWidth="130.0" promptText="Rating 1-5" />
+      <Button fx:id="addReviewButton" layoutX="392.0" layoutY="188.0" mnemonicParsing="false" prefHeight="11.0" prefWidth="237.0" text="Add my rating" />
       <Button fx:id="backButton" mnemonicParsing="false" text="Back" />
    </children>
 </AnchorPane>
