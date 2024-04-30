@@ -43,15 +43,10 @@ public class CourseSearchController {
 
     public void initialize() throws SQLException {
         driver = new DatabaseDriver("course_reviews.sqlite");
-        courseIdColumn = new TableColumn<>("ID");
-        courseNumberColumn = new TableColumn<>("Number");
-        courseRatingColumn = new TableColumn<>("Rating");
-        courseTitleColumn = new TableColumn<>("Title");
-        courseMnemonicColumn = new TableColumn<>("Mnemonic");
         courseTitleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
         courseMnemonicColumn.setCellValueFactory(new PropertyValueFactory<>("mnemonic"));
-        courseNumberColumn.setCellValueFactory(new PropertyValueFactory<>("number"));
-        courseRatingColumn.setCellValueFactory(new PropertyValueFactory<>("rating"));
+        courseNumberColumn.setCellValueFactory(new PropertyValueFactory<>("courseNumber"));
+        courseRatingColumn.setCellValueFactory(new PropertyValueFactory<>("averageRating"));
         courseIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         driver.connect();
         loadCourses();
@@ -62,7 +57,6 @@ public class CourseSearchController {
         try{
             List<Course> courses = driver.getCourses();
             ObservableList<Course> observableCourses = FXCollections.observableList(courses);
-            courseTable = new TableView<>();
             courseTable.setItems(observableCourses);
         } catch (SQLException e) {
             throw new RuntimeException(e);
