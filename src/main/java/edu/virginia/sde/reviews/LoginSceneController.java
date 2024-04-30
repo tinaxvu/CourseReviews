@@ -37,10 +37,10 @@ public class LoginSceneController {
         String password = passwordField.getText();
         try {
             if (isValidCredentials(username, password)) {
-                navigateToCourseSearchScreen();
                 successLabel.setText("Login successful");
                 successLabel.setVisible(true);
                 errorLabel.setVisible(false);
+                navigateToCourseSearchScreen();
             } else {
                 errorLabel.setText("Invalid username/password");
                 errorLabel.setVisible(true);
@@ -59,7 +59,12 @@ public class LoginSceneController {
         String username = usernameField.getText();
         String password = passwordField.getText();
         try {
-            if (isPasswordValid(password)) {
+            if(usernameExists(username)){
+                errorLabel.setText("Username already exists");
+                errorLabel.setVisible(true);
+                successLabel.setVisible(false);
+            }
+            else if (isPasswordValid(password)) {
                 User newUser = new User(username, password);
                 databaseDriver.addUser(newUser);
                 databaseDriver.commit();
@@ -67,7 +72,7 @@ public class LoginSceneController {
                 successLabel.setVisible(true);
                 errorLabel.setVisible(false);
             } else {
-                errorLabel.setText("Invalid username/password");
+                errorLabel.setText("Invalid password, must have 8+ characters");
                 errorLabel.setVisible(true);
                 successLabel.setVisible(false);
             }
@@ -103,9 +108,9 @@ public class LoginSceneController {
             Stage stage = new Stage();
             stage.setTitle("Course Search");
             stage.setScene(scene);
-            stage.show();
             Stage loginStage = (Stage) usernameField.getScene().getWindow();
             loginStage.close();
+            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
