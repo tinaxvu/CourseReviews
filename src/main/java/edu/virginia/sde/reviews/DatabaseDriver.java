@@ -291,6 +291,150 @@ public class DatabaseDriver {
         }
         return null;
     }
+    public List<Course> getCoursesByNumber(int number) throws SQLException {
+        if(connection != null && !connection.isClosed()){
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM COURSES WHERE COURSENUMBER = ?");
+            ps.setInt(1, number);
+            ResultSet resultSet = ps.executeQuery();
+            List<Course> courses = new ArrayList<>();
+            while(resultSet.next()){
+                Course course = new Course();
+                course.setId(resultSet.getInt("ID"));
+                course.setCourseNumber(number);
+                course.setTitle(resultSet.getString("Title"));
+                course.setMnemonic(resultSet.getString("Mnemonic"));
+                if(resultSet.getDouble("Rating") != 0.0){
+                    course.setAverageRating(resultSet.getDouble("Rating"));
+                }
+                courses.add(course);
+            }
+            return courses;
+        }
+        return null;
+    }
+
+    public List<Course> getCoursesByTitleSubstring(String title) throws SQLException {
+        if(connection != null && !connection.isClosed()){
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM COURSES WHERE TITLE LIKE ?");
+            ps.setString(1, "%" + title + "%");
+            ResultSet resultSet = ps.executeQuery();
+            List<Course> courses = new ArrayList<>();
+            while(resultSet.next()){
+                Course course = new Course();
+                course.setId(resultSet.getInt("ID"));
+                course.setCourseNumber(resultSet.getInt("CourseNumber"));
+                course.setTitle(resultSet.getString("Title"));
+                course.setMnemonic(resultSet.getString("Mnemonic"));
+                if(resultSet.getDouble("Rating") != 0.0){
+                    course.setAverageRating(resultSet.getDouble("Rating"));
+                }
+                courses.add(course);
+            }
+            return courses;
+        }
+        return null;
+    }
+    public List<Course> getCoursesByMnemonicNumber(String mnemonic, int number) throws SQLException {
+        if(connection != null && !connection.isClosed()){
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM COURSES WHERE MNEMONIC = ? AND COURSENUMBER = ?");
+            ps.setString(1, mnemonic);
+            ps.setInt(2, number);
+            ResultSet resultSet = ps.executeQuery();
+            List<Course> courses = new ArrayList<>();
+            while(resultSet.next()){
+                Course course = new Course();
+                course.setId(resultSet.getInt("ID"));
+                course.setCourseNumber(number);
+                course.setTitle(resultSet.getString("Title"));
+                course.setMnemonic(mnemonic);
+                if(resultSet.getDouble("Rating") != 0.0){
+                    course.setAverageRating(resultSet.getDouble("Rating"));
+                }
+                courses.add(course);
+            }
+            return courses;
+        }
+        return null;
+    }
+    public List<Course> getCoursesByMnemonicTitle(String mnemonic, String title) throws SQLException {
+        if(connection != null && !connection.isClosed()){
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM COURSES WHERE MNEMONIC = ? AND TITLE LIKE ?");
+            ps.setString(2, "%" + title + "%");
+            ps.setString(1, mnemonic);
+            ResultSet resultSet = ps.executeQuery();
+            List<Course> courses = new ArrayList<>();
+            while(resultSet.next()){
+                Course course = new Course();
+                course.setId(resultSet.getInt("ID"));
+                course.setCourseNumber(resultSet.getInt("CourseNumber"));
+                course.setTitle(resultSet.getString("Title"));
+                course.setMnemonic(mnemonic);
+                if(resultSet.getDouble("Rating") != 0.0){
+                    course.setAverageRating(resultSet.getDouble("Rating"));
+                }
+                courses.add(course);
+            }
+            return courses;
+        }
+        return null;
+    }
+    public List<Course> getCoursesByNumberTitle(int number, String title) throws SQLException {
+        if(connection != null && !connection.isClosed()){
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM COURSES WHERE COURSENUMBER = ? AND TITLE LIKE ?");
+            ps.setString(2, "%" + title + "%");
+            ps.setInt(1, number);
+            ResultSet resultSet = ps.executeQuery();
+            List<Course> courses = new ArrayList<>();
+            while(resultSet.next()){
+                Course course = new Course();
+                course.setId(resultSet.getInt("ID"));
+                course.setCourseNumber(number);
+                course.setTitle(resultSet.getString("Title"));
+                course.setMnemonic(resultSet.getString("Mnemonic"));
+                if(resultSet.getDouble("Rating") != 0.0){
+                    course.setAverageRating(resultSet.getDouble("Rating"));
+                }
+                courses.add(course);
+            }
+            return courses;
+        }
+        return null;
+    }
+    public List<Course> getCoursesByMnemonicTitleNumber(String mnemonic, String title,int number) throws SQLException {
+        if(connection != null && !connection.isClosed()){
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM COURSES WHERE MNEMONIC = ? AND TITLE LIKE ? AND COURSENUMBER = ?");
+            ps.setString(2, "%" + title + "%");
+            ps.setString(1, mnemonic);
+            ps.setInt(3, number);
+            ResultSet resultSet = ps.executeQuery();
+            List<Course> courses = new ArrayList<>();
+            while(resultSet.next()){
+                Course course = new Course();
+                course.setId(resultSet.getInt("ID"));
+                course.setCourseNumber(number);
+                course.setTitle(resultSet.getString("Title"));
+                course.setMnemonic(mnemonic);
+                if(resultSet.getDouble("Rating") != 0.0){
+                    course.setAverageRating(resultSet.getDouble("Rating"));
+                }
+                courses.add(course);
+            }
+            return courses;
+        }
+        return null;
+    }
+
+    public boolean doesCourseExist(String mnemonic, String title, int number)throws SQLException{
+        if(connection != null && !connection.isClosed()) {
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM COURSES WHERE MNEMONIC = ? AND TITLE = ? AND COURSENUMBER = ?");
+            ps.setString(1, mnemonic);
+            ps.setString(2, title);
+            ps.setInt(3, number);
+            ResultSet resultSet = ps.executeQuery();
+            return resultSet.next();
+        }
+        return false;
+    }
 
     public User getUserByUsername(String username) throws SQLException {
         if (connection != null && !connection.isClosed()) {

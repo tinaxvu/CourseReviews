@@ -31,6 +31,10 @@ public class LoginSceneController {
         databaseDriver.connect();
     }
 
+    public String getUsername() {
+        return usernameField.getText();
+    }
+
     @FXML
     private void handleLoginButton() {
         String username = usernameField.getText();
@@ -111,7 +115,8 @@ public class LoginSceneController {
             Stage loginStage = (Stage) usernameField.getScene().getWindow();
             loginStage.close();
             stage.show();
-        } catch (IOException e) {
+            databaseDriver.disconnect();
+        } catch (IOException | SQLException e) {
             e.printStackTrace();
         }
     }
@@ -121,5 +126,4 @@ public class LoginSceneController {
         Stage stage = (Stage) usernameField.getScene().getWindow();
         stage.close();
     }
-
 }
