@@ -133,6 +133,7 @@ public class DatabaseDriver {
                     review.setId(ID.getInt(1));
                 }
             }
+            calculateAverageRating(review.getCourse());
         }
     }
 
@@ -308,22 +309,13 @@ public class DatabaseDriver {
         return null;
     }
 
-    public double calculateAverageRating(Course course) throws SQLException {
-        if (connection != null && !connection.isClosed()) {
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM REVIEWS WHERE CourseID = ?");
-            ps.setInt(1, course.getId());
-            ResultSet averageResultSet = ps.executeQuery();
-            double averageRating = 0.0;
-            if (averageResultSet.next()) {
-                while (averageResultSet.next()) {
-                    if (averageResultSet.getDouble("Rating") != 0.0) {
-                        averageRating += averageResultSet.getDouble("Rating");
-                    }
-                }
-                return averageRating;
-            }
+    public void calculateAverageRating(Course course) throws SQLException {
+        List<Review> courseReviews = getReviewsByCourse(course);
+        double averageRating = 0.0;
+        for(Review review : courseReviews){
+            averageRating += review.getRating();
         }
-        return 0.0;
+        course.setAverageRating(averageRating/courseReviews.size());
     }
 
 
