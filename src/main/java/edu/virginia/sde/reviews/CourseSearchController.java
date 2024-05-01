@@ -151,6 +151,8 @@ public class CourseSearchController {
         String searchMnemonic = MnemonicSearchField.getText().toUpperCase();
         String searchTitle = TitleSearchField.getText();
         String searchNumber = NumberSearchField.getText();
+        int searchNumberInt;
+
         try
         {
             if (searchNumber.isEmpty() && searchTitle.isEmpty() && searchMnemonic.isEmpty()){
@@ -170,11 +172,40 @@ public class CourseSearchController {
                 SearchErrorLabel.setText("Please enter a valid title");
                 SearchErrorLabel.setVisible(true);
                 SearchSuccessLabel.setVisible(false);
-            }else if (!searchMnemonic.isEmpty() && searchNumber.isEmpty() && searchTitle.isEmpty()){
+            }
+            else if (!searchMnemonic.isEmpty() && searchNumber.isEmpty() && searchTitle.isEmpty()){
                 List<Course> courses = driver.getCoursesByMnemonic(searchMnemonic);
                 loadCourses(courses);
             }
-        } catch (SQLException e) {
+            else if (searchMnemonic.isEmpty() && !searchNumber.isEmpty() && searchTitle.isEmpty()){
+                searchNumberInt = Integer.parseInt(searchNumber);
+                List<Course> courses = driver.getCoursesByNumber(searchNumberInt);
+                loadCourses(courses);
+            }
+            else if (searchMnemonic.isEmpty() && searchNumber.isEmpty() && !searchTitle.isEmpty()){
+                List<Course> courses = driver.getCoursesByTitleSubstring(searchTitle);
+                loadCourses(courses);
+            }
+            else if (!searchMnemonic.isEmpty() && !searchNumber.isEmpty() && searchTitle.isEmpty()){
+                searchNumberInt = Integer.parseInt(searchNumber);
+                List<Course> courses = driver.getCoursesByMnemonicNumber(searchMnemonic,searchNumberInt);
+                loadCourses(courses);
+            }
+            else if (!searchMnemonic.isEmpty() && searchNumber.isEmpty() && !searchTitle.isEmpty()){
+                List<Course> courses = driver.getCoursesByMnemonicTitle(searchMnemonic,searchTitle);
+                loadCourses(courses);
+            }
+            else if (searchMnemonic.isEmpty() && !searchNumber.isEmpty() && !searchTitle.isEmpty()){
+                searchNumberInt = Integer.parseInt(searchNumber);
+                List<Course> courses = driver.getCoursesByNumberTitle(searchNumberInt,searchTitle);
+                loadCourses(courses);
+            }
+            else if (!searchMnemonic.isEmpty() && !searchNumber.isEmpty() && !searchTitle.isEmpty()){
+                searchNumberInt = Integer.parseInt(searchNumber);
+                List<Course> courses = driver.getCoursesByMnemonicTitleNumber(searchMnemonic,searchTitle,searchNumberInt);
+                loadCourses(courses);
+            }
+        } catch (SQLException e ) {
             e.printStackTrace();
             addErrorLabel.setText("Database error");
             addErrorLabel.setVisible(true);
@@ -187,6 +218,7 @@ public class CourseSearchController {
     }
     public boolean isNumberValid (String number){
         return number.length() == 4;
+
     }
     public boolean isTitleValid (String title){
         return !title.isEmpty() && title.length() <= 50;

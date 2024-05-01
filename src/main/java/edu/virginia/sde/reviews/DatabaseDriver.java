@@ -322,7 +322,7 @@ public class DatabaseDriver {
                 Course course = new Course();
                 course.setId(resultSet.getInt("ID"));
                 course.setCourseNumber(resultSet.getInt("CourseNumber"));
-                course.setTitle(title);
+                course.setTitle(resultSet.getString("Title"));
                 course.setMnemonic(resultSet.getString("Mnemonic"));
                 if(resultSet.getDouble("Rating") != 0.0){
                     course.setAverageRating(resultSet.getDouble("Rating"));
@@ -366,7 +366,7 @@ public class DatabaseDriver {
                 Course course = new Course();
                 course.setId(resultSet.getInt("ID"));
                 course.setCourseNumber(resultSet.getInt("CourseNumber"));
-                course.setTitle(title);
+                course.setTitle(resultSet.getString("Title"));
                 course.setMnemonic(mnemonic);
                 if(resultSet.getDouble("Rating") != 0.0){
                     course.setAverageRating(resultSet.getDouble("Rating"));
@@ -388,7 +388,7 @@ public class DatabaseDriver {
                 Course course = new Course();
                 course.setId(resultSet.getInt("ID"));
                 course.setCourseNumber(number);
-                course.setTitle(title);
+                course.setTitle(resultSet.getString("Title"));
                 course.setMnemonic(resultSet.getString("Mnemonic"));
                 if(resultSet.getDouble("Rating") != 0.0){
                     course.setAverageRating(resultSet.getDouble("Rating"));
@@ -411,7 +411,7 @@ public class DatabaseDriver {
                 Course course = new Course();
                 course.setId(resultSet.getInt("ID"));
                 course.setCourseNumber(number);
-                course.setTitle(title);
+                course.setTitle(resultSet.getString("Title"));
                 course.setMnemonic(mnemonic);
                 if(resultSet.getDouble("Rating") != 0.0){
                     course.setAverageRating(resultSet.getDouble("Rating"));
