@@ -5,7 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class HelloWorldApplication extends Application {
+public class CourseReviewsApplication extends Application {
     public static void main(String[] args) {
         launch(args);
     }
