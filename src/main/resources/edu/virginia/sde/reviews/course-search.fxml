@@ -51,6 +51,6 @@
          <Font name="SansSerif Regular" size="16.0" />
       </font>
    </Button>
-   <Label visible="false" fx:id="addSuccessLabel" layoutX="755.0" layoutY="160.0" text="AddError" textFill="#f40505" />
-   <Label visible="false" fx:id="addErrorLabel" layoutX="748.0" layoutY="161.0" text="AddSuccess" textFill="#00f600" />
+   <Label visible="false" fx:id="addSuccessLabel" layoutX="755.0" layoutY="160.0" text="AddError" textFill="#06f417"/>
+   <Label visible="false" fx:id="addErrorLabel" layoutX="748.0" layoutY="161.0" text="AddSuccess" textFill="#f60200"/>
 </AnchorPane>

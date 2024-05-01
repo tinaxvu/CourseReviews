@@ -94,9 +94,10 @@ public class CourseSearchController {
         Stage SearchStage = (Stage) courseTable.getScene().getWindow();
         SearchStage.close();
         stage.show();
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
+        driver.disconnect();
+    } catch (IOException | SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void handleAddButton() {
