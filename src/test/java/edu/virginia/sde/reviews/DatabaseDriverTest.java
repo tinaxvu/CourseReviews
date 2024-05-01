@@ -186,6 +186,13 @@ class DatabaseDriverTest {
         databaseDriver.disconnect();
     }
     @Test
+    void getCoursesByMnemonicEmptyTest() throws SQLException {
+        databaseDriver.commit();
+        List<Course> courses= databaseDriver.getCoursesByMnemonic("ENG");
+        assertEquals(0, courses.size());
+        databaseDriver.disconnect();
+    }
+    @Test
     void getCoursesTest() throws SQLException {
         databaseDriver.addCourse(Chem);
         databaseDriver.addCourse(math);
@@ -205,6 +212,16 @@ class DatabaseDriverTest {
         databaseDriver.commit();
         User user = databaseDriver.getUserByUsername("username2");
         assertEquals(user2.getId(),user.getId());
+        databaseDriver.disconnect();
+    }
+    @Test
+    void doesCourseExistTest() throws SQLException {
+        boolean emptyTest = databaseDriver.doesCourseExist("CHEM", "Chemistry 101", 101);
+        assertFalse(emptyTest);
+        databaseDriver.addCourse(Chem);
+        databaseDriver.commit();
+        boolean trueTest= databaseDriver.doesCourseExist("CHEM", "Chemistry 101", 101);
+        assertTrue(trueTest);
         databaseDriver.disconnect();
     }
 

@@ -111,7 +111,8 @@ public class LoginSceneController {
             Stage loginStage = (Stage) usernameField.getScene().getWindow();
             loginStage.close();
             stage.show();
-        } catch (IOException e) {
+            databaseDriver.disconnect();
+        } catch (IOException | SQLException e) {
             e.printStackTrace();
         }
     }

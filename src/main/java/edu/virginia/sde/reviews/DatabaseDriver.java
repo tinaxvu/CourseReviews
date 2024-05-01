@@ -290,6 +290,17 @@ public class DatabaseDriver {
         }
         return null;
     }
+    public boolean doesCourseExist(String mnemonic, String title, int number)throws SQLException{
+        if(connection != null && !connection.isClosed()) {
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM COURSES WHERE MNEMONIC = ? AND TITLE = ? AND COURSENUMBER = ?");
+            ps.setString(1, mnemonic);
+            ps.setString(2, title);
+            ps.setInt(3, number);
+            ResultSet resultSet = ps.executeQuery();
+            return resultSet.next();
+        }
+        return false;
+    }
 
     public User getUserByUsername(String username) throws SQLException {
         if (connection != null && !connection.isClosed()) {
