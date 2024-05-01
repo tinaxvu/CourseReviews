@@ -12,14 +12,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
+import javafx.scene.control.*;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.awt.*;
+import java.awt.Button;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -222,6 +221,17 @@ public class CourseSearchController {
     }
     public boolean isTitleValid (String title){
         return !title.isEmpty() && title.length() <= 50;
+    }
+
+    public void handleTableRowClicked() {
+        TableRow<Course> courseRow = new TableRow<>();
+        TableView.TableViewSelectionModel<Course> rowData = courseTable.getSelectionModel();
+        rowData.getSelectedItem();
+    }
+
+    public void changeSceneToCourseReviews() {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("course-reviews.fxml"));
     }
 
 
