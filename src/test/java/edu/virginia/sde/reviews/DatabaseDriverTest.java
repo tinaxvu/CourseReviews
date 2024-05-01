@@ -193,6 +193,74 @@ class DatabaseDriverTest {
         databaseDriver.disconnect();
     }
     @Test
+    void getCoursesByNumberTest() throws SQLException {
+        databaseDriver.addCourse(Chem);
+        databaseDriver.addCourse(math);
+        databaseDriver.addCourse(english);
+        databaseDriver.commit();
+        List<Course> courses= databaseDriver.getCoursesByNumber(101);
+        assertEquals(Chem.getId(),courses.get(0).getId());
+        assertEquals(1, courses.size());
+        databaseDriver.disconnect();
+    }
+    @Test
+    void getCoursesByTitleSubstringTest() throws SQLException {
+        databaseDriver.addCourse(Chem);
+        databaseDriver.addCourse(math);
+        databaseDriver.addCourse(english);
+        databaseDriver.commit();
+        List<Course> courses= databaseDriver.getCoursesByTitleSubstring("hem");
+        assertEquals(Chem.getId(),courses.get(0).getId());
+        assertEquals(math.getId(),courses.get(1).getId());
+        assertEquals(2, courses.size());
+        databaseDriver.disconnect();
+    }
+    @Test
+    void getCoursesByMnemonicNumberTest() throws SQLException {
+        databaseDriver.addCourse(Chem);
+        databaseDriver.addCourse(math);
+        databaseDriver.addCourse(english);
+        databaseDriver.commit();
+        List<Course> courses= databaseDriver.getCoursesByMnemonicNumber("CHEM",101);
+        assertEquals(Chem.getId(),courses.get(0).getId());
+        assertEquals(1, courses.size());
+        databaseDriver.disconnect();
+    }
+    @Test
+    void getCoursesByMnemonicTitleTest() throws SQLException {
+        databaseDriver.addCourse(Chem);
+        databaseDriver.addCourse(math);
+        databaseDriver.addCourse(english);
+        databaseDriver.commit();
+        List<Course> courses= databaseDriver.getCoursesByMnemonicTitle("CHEM","hem");
+        assertEquals(Chem.getId(),courses.get(0).getId());
+        assertEquals(1, courses.size());
+        databaseDriver.disconnect();
+    }
+    @Test
+    void getCoursesByNumberTitleTest() throws SQLException {
+        databaseDriver.addCourse(Chem);
+        databaseDriver.addCourse(math);
+        databaseDriver.addCourse(english);
+        databaseDriver.commit();
+        List<Course> courses= databaseDriver.getCoursesByNumberTitle(101,"hem");
+        assertEquals(Chem.getId(),courses.get(0).getId());
+        assertEquals(2, courses.size());
+        databaseDriver.disconnect();
+    }
+    @Test
+    void getCoursesByMnemonicNumberTitleTest() throws SQLException {
+        databaseDriver.addCourse(Chem);
+        databaseDriver.addCourse(math);
+        databaseDriver.addCourse(english);
+        databaseDriver.commit();
+        List<Course> courses= databaseDriver.getCoursesByMnemonicTitleNumber("CHEM", "hem", 101);
+        assertEquals(Chem.getId(),courses.get(0).getId());
+        assertEquals(1, courses.size());
+        databaseDriver.disconnect();
+    }
+
+    @Test
     void getCoursesTest() throws SQLException {
         databaseDriver.addCourse(Chem);
         databaseDriver.addCourse(math);
