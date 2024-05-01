@@ -462,6 +462,18 @@ public class DatabaseDriver {
         course.setAverageRating(averageRating/courseReviews.size());
     }
 
+    public void updateReview(Review review) throws SQLException {
+        if(connection != null && !connection.isClosed()){
+            PreparedStatement ps = connection.prepareStatement("UPDATE Reviews set Comment = ? and Rating = ? and Stamp = ?  where id = ?");
+            ps.setString(1, review.getComment());
+            ps.setDouble(2, review.getRating());
+            ps.setTimestamp(3, review.getTimestamp());
+            ps.setInt(4, review.getId());
+            ps.executeUpdate();
+            calculateAverageRating(review.getCourse());
+        }
+    }
+
 
 
 }
