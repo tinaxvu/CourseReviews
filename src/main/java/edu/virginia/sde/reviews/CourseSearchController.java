@@ -129,7 +129,12 @@ public class CourseSearchController {
                 addErrorLabel.setText("Please enter a valid title");
                 addErrorLabel.setVisible(true);
                 addSuccessLabel.setVisible(false);
-            }else{
+            }else if(driver.doesCourseExist(newMnemonic,newTitle,Integer.parseInt(newNumber))){
+                addErrorLabel.setText("Course already exists");
+                addErrorLabel.setVisible(true);
+                addSuccessLabel.setVisible(false);
+            }
+            else{
                 int number = Integer.parseInt(newNumber);
                 Course course = new Course(number, newMnemonic, newTitle);
                 driver.addCourse(course);
@@ -216,6 +221,11 @@ public class CourseSearchController {
         return mnemonic.length() > 1 && mnemonic.length() < 5;
     }
     public boolean isNumberValid (String number){
+        try {
+            Integer.parseInt(number);
+        } catch(NumberFormatException e){
+            return false;
+        }
         return number.length() == 4;
 
     }
@@ -235,4 +245,19 @@ public class CourseSearchController {
     }
 
 
+    public void handleMyReviewsButton() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("my-reviews.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = new Stage();
+            stage.setTitle("My Reviews");
+            stage.setScene(scene);
+            Stage loginStage = (Stage) courseTable.getScene().getWindow();
+            loginStage.close();
+            stage.show();
+            driver.disconnect();
+        } catch (IOException | SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
