@@ -25,10 +25,15 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class CourseSearchController {
+
     @FXML
     private Button searchButton;
     @FXML
     private javafx.scene.control.Label addErrorLabel;
+    @FXML
+    private javafx.scene.control.Label SearchSuccessLabel;
+    @FXML
+    private javafx.scene.control.Label SearchErrorLabel;
     @FXML
     private javafx.scene.control.Label addSuccessLabel;
     @FXML
@@ -82,6 +87,11 @@ public class CourseSearchController {
             throw new RuntimeException(e);
         }
     }
+    @FXML
+    public void loadCourses(List<Course> courses){
+        ObservableList<Course> observableCourses = FXCollections.observableList(courses);
+        courseTable.setItems(observableCourses);
+    }
 
     public void handleLogOutButton() {
         try
@@ -117,7 +127,7 @@ public class CourseSearchController {
                 addSuccessLabel.setVisible(false);
             }
             else if(!isTitleValid(newTitle)) {
-                addErrorLabel.setText("Please enter a valid number");
+                addErrorLabel.setText("Please enter a valid title");
                 addErrorLabel.setVisible(true);
                 addSuccessLabel.setVisible(false);
             }else{
@@ -137,6 +147,40 @@ public class CourseSearchController {
             addSuccessLabel.setVisible(false);
         }
     }
+    public void handleSearchButton() {
+        String searchMnemonic = MnemonicSearchField.getText().toUpperCase();
+        String searchTitle = TitleSearchField.getText();
+        String searchNumber = NumberSearchField.getText();
+        try
+        {
+            if (searchNumber.isEmpty() && searchTitle.isEmpty() && searchMnemonic.isEmpty()){
+                loadCourses();
+            }
+            if(!isMnemonicValid(searchMnemonic) && !searchMnemonic.isEmpty()){
+                SearchErrorLabel.setText("Please enter a valid mnemonic");
+                SearchErrorLabel.setVisible(true);
+                SearchSuccessLabel.setVisible(false);
+            }
+            else if(!isNumberValid(searchNumber) && !searchNumber.isEmpty()){
+                SearchErrorLabel.setText("Please enter a valid number");
+                SearchErrorLabel.setVisible(true);
+                SearchSuccessLabel.setVisible(false);
+            }
+            else if(!isTitleValid(searchTitle) && !searchTitle.isEmpty()) {
+                SearchErrorLabel.setText("Please enter a valid title");
+                SearchErrorLabel.setVisible(true);
+                SearchSuccessLabel.setVisible(false);
+            }else if (!searchMnemonic.isEmpty() && searchNumber.isEmpty() && searchTitle.isEmpty()){
+                List<Course> courses = driver.getCoursesByMnemonic(searchMnemonic);
+                loadCourses(courses);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            addErrorLabel.setText("Database error");
+            addErrorLabel.setVisible(true);
+            addSuccessLabel.setVisible(false);
+        }
+    }
 
     public boolean isMnemonicValid (String mnemonic){
         return mnemonic.length() > 1 && mnemonic.length() < 5;
@@ -147,4 +191,6 @@ public class CourseSearchController {
     public boolean isTitleValid (String title){
         return !title.isEmpty() && title.length() <= 50;
     }
+
+
 }

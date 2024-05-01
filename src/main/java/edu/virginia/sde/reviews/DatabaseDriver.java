@@ -290,6 +290,27 @@ public class DatabaseDriver {
         }
         return null;
     }
+    public List<Course> getCoursesByNumber(int number) throws SQLException {
+        if(connection != null && !connection.isClosed()){
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM COURSES WHERE COURSENUMBER = ?");
+            ps.setInt(1, number);
+            ResultSet resultSet = ps.executeQuery();
+            List<Course> courses = new ArrayList<>();
+            while(resultSet.next()){
+                Course course = new Course();
+                course.setId(resultSet.getInt("ID"));
+                course.setCourseNumber(resultSet.getInt("CourseNumber"));
+                course.setTitle(resultSet.getString("Title"));
+                course.setMnemonic(resultSet.getString("Mnemonic"));
+                if(resultSet.getDouble("Rating") != 0.0){
+                    course.setAverageRating(resultSet.getDouble("Rating"));
+                }
+                courses.add(course);
+            }
+            return courses;
+        }
+        return null;
+    }
     public boolean doesCourseExist(String mnemonic, String title, int number)throws SQLException{
         if(connection != null && !connection.isClosed()) {
             PreparedStatement ps = connection.prepareStatement("SELECT * FROM COURSES WHERE MNEMONIC = ? AND TITLE = ? AND COURSENUMBER = ?");
