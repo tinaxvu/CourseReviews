@@ -19,6 +19,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import java.awt.*;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -33,6 +34,9 @@ public class CourseReviewsSceneController {
 
     @FXML
     private Label errorLabel;
+
+    @FXML
+    private Label name;
 
     @FXML
     private TextArea reviewTextArea;
@@ -85,6 +89,8 @@ public class CourseReviewsSceneController {
             List<Review> reviews = databaseDriver.getReviewsByCourse(selectedCourse);
             ObservableList<Review> observableReviews = FXCollections.observableList(reviews);
             reviewsTable.setItems(observableReviews);
+            name.setText(selectedCourse.getMnemonic() + " " + selectedCourse.getCourseNumber() + ": " + selectedCourse.getTitle());
+            name.setVisible(true);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
