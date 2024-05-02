@@ -229,8 +229,6 @@ public class CourseSearchController {
         ObservableList<Course> courseObservableList;
         courseObservableList=courseTable.getSelectionModel().getSelectedItems();
 
-        System.out.println(courseObservableList.get(0).getCourseNumber());
-
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("course-reviews.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
 
