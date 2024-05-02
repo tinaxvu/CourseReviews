@@ -12,7 +12,6 @@ import javafx.fxml.FXML;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -20,7 +19,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import java.awt.*;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -58,18 +56,9 @@ public class CourseReviewsSceneController {
     @FXML
     private TableColumn<Review, Timestamp> timestampColumn;
 
-    private String username;
-
-    private Course course;
-
     private User user;
 
-    private String currentUser;
-
     private DatabaseDriver databaseDriver;
-
-    private Timestamp timestamp;
-
     private Course selectedCourse;
 
     public void initialize(Course course) throws SQLException {
@@ -83,7 +72,7 @@ public class CourseReviewsSceneController {
 
     public void populateTable(Course course) throws SQLException {
         try {
-            selectedCourse = course;
+            this.selectedCourse = course;
             List<Review> reviews = databaseDriver.getReviewsByCourse(selectedCourse);
             ObservableList<Review> observableReviews = FXCollections.observableList(reviews);
             reviewsTable.setItems(observableReviews);
@@ -92,14 +81,6 @@ public class CourseReviewsSceneController {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public void setCurrentUser(String username) {
-        this.currentUser = username;
-    }
-
-    public User getUser() throws SQLException {
-        return databaseDriver.getUserByUsername(username);
     }
 
     public void setUser(User user) {
@@ -116,20 +97,21 @@ public class CourseReviewsSceneController {
                 errorLabel.setVisible(true);
                 successLabel.setVisible(false);
 
-            } else if (reviewAddedAlready(course)) {
+            } else if (reviewAddedAlready()) {
                 errorLabel.setText("You already made a review");
                 errorLabel.setVisible(true);
                 successLabel.setVisible(false);
 
-            } else if (isValidRating(ratingTextField.getText()) && !reviewAddedAlready(course)) {
-                Review review = new Review(user, course, reviewComment, Double.parseDouble(ratingTextField.getText()), timestamp);
+            } else if (isValidRating(ratingTextField.getText()) && !reviewAddedAlready()) {
+                Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                Review review = new Review(user, selectedCourse, reviewComment, Double.parseDouble(ratingTextField.getText()), timestamp);
                 successLabel.setText("Review added!");
                 successLabel.setVisible(true);
                 databaseDriver.addReview(review);
-                populateTable(course);
+                populateTable(selectedCourse);
             }
 
-        } catch (SQLException e) {
+        } catch (SQLException | IOException e) {
             e.printStackTrace();
             errorLabel.setText("Database error");
             errorLabel.setVisible(true);
@@ -149,21 +131,13 @@ public class CourseReviewsSceneController {
         }
     }
 
-    /**
-     * gets the User object from username
-     * gets a list of reviews made by user
-     * if course matches, user has already added review
-     * @param course
-     * @return
-     * @throws SQLException
-     */
-    public boolean reviewAddedAlready(Course course) throws SQLException {
-        user = databaseDriver.getUserByUsername(username);
+    public boolean reviewAddedAlready() throws SQLException, IOException {
+        setUser(databaseDriver.getUserByUsername(CurrentUser.getInstance().getUsername()));
         List<Review> reviews = databaseDriver.getReviewsByUser(user);
 
         // iterate through user's reviews
         for (Review review : reviews) {
-            if (review.getCourse().equals(course)) {
+            if (review.getCourse().equals(selectedCourse)) {
                 return true;
             }
         }
