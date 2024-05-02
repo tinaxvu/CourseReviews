@@ -1,14 +1,7 @@
 package edu.virginia.sde.reviews;
 
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.Property;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -16,8 +9,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-
-import java.awt.*;
 import java.awt.Button;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -233,17 +224,30 @@ public class CourseSearchController {
         return !title.isEmpty() && title.length() <= 50;
     }
 
-    public void handleTableRowClicked() {
-        TableRow<Course> courseRow = new TableRow<>();
-        TableView.TableViewSelectionModel<Course> rowData = courseTable.getSelectionModel();
-        rowData.getSelectedItem();
-    }
+    @FXML
+    public void handleClickToChangeToReviews() throws IOException {
+        ObservableList<Course> courseObservableList;
+        courseObservableList=courseTable.getSelectionModel().getSelectedItems();
 
-    public void changeSceneToCourseReviews() {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("course-reviews.fxml"));
-    }
+        System.out.println(courseObservableList.get(0).getCourseNumber());
 
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("course-reviews.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+
+        CourseReviewsSceneController controller = fxmlLoader.getController();
+        try {
+            controller.initialize(courseObservableList.get(0));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        Stage stage = new Stage();
+        stage.setTitle("Course Search");
+        stage.setScene(scene);
+        Stage courseSearch = (Stage) courseTable.getScene().getWindow();
+        courseSearch.close();
+        stage.show();
+    }
 
     public void handleMyReviewsButton() {
         try {
