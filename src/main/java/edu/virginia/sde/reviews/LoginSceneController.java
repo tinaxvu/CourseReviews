@@ -40,6 +40,7 @@ public class LoginSceneController {
                 successLabel.setText("Login successful");
                 successLabel.setVisible(true);
                 errorLabel.setVisible(false);
+                CurrentUser.init(usernameField.getText());
                 navigateToCourseSearchScreen();
             } else {
                 errorLabel.setText("Invalid username/password");
