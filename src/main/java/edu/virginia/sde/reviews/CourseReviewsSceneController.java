@@ -46,10 +46,6 @@ public class CourseReviewsSceneController {
 
     @FXML
     private Button backButton;
-
-    @FXML
-    private LoginSceneController loginSceneController;
-
     @FXML
     private TableView<Review> reviewsTable;
 
@@ -68,6 +64,8 @@ public class CourseReviewsSceneController {
 
     private User user;
 
+    private String currentUser;
+
     private DatabaseDriver databaseDriver;
 
     private Timestamp timestamp;
@@ -76,7 +74,7 @@ public class CourseReviewsSceneController {
 
     public void initialize(Course course) throws SQLException {
         databaseDriver = new DatabaseDriver("course_reviews.sqlite");
-        commentColumn.setCellValueFactory(new PropertyValueFactory<>("reviewComment"));
+        commentColumn.setCellValueFactory(new PropertyValueFactory<>("comment"));
         ratingColumn.setCellValueFactory(new PropertyValueFactory<>("rating"));
         timestampColumn.setCellValueFactory(new PropertyValueFactory<>("timestamp"));
         databaseDriver.connect();
@@ -96,8 +94,8 @@ public class CourseReviewsSceneController {
         }
     }
 
-    public void setUsername() {
-        this.username = loginSceneController.getUsername();
+    public void setCurrentUser(String username) {
+        this.currentUser = username;
     }
 
     public User getUser() throws SQLException {
