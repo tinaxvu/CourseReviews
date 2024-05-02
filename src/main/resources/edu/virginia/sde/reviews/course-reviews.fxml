@@ -9,12 +9,13 @@
       <TextArea fx:id="reviewTextArea" layoutX="208.0" layoutY="116.0" prefHeight="66.0" prefWidth="352.0" promptText="Add a review..." />
       <TextField fx:id="ratingTextField" layoutX="209.0" layoutY="187.0" prefHeight="26.0" prefWidth="140.0" promptText="Rating 1-5" />
       <Button fx:id="addReviewButton" layoutX="354.0" layoutY="186.0" mnemonicParsing="false" onAction="#handleAddReview" prefHeight="26.0" prefWidth="205.0" text="Add my rating" />
-      <Button fx:id="backButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="140.0" text="Back to course search" />
-      <TableView layoutX="70.0" layoutY="275.0" prefHeight="422.0" prefWidth="1091.0">
+      <Button fx:id="backButton" mnemonicParsing="false" onAction="#handleBackButton" prefHeight="26.0" prefWidth="140.0" text="Back to course search" />
+      <Label fx:id="name" layoutX="207.0" layoutY="38.0" prefHeight="66.0" prefWidth="640.0" />
+      <TableView fx:id="reviewsTable" layoutX="70.0" layoutY="275.0" prefHeight="422.0" prefWidth="1091.0">
         <columns>
-          <TableColumn prefWidth="803.0" text="Comment" />
-          <TableColumn prefWidth="99.0" text="Rating" />
-            <TableColumn prefWidth="188.0" text="Time" />
+          <TableColumn fx:id="commentColumn" prefWidth="803.0" text="Comment" />
+          <TableColumn fx:id="ratingColumn" prefWidth="99.0" text="Rating" />
+            <TableColumn fx:id="timestampColumn" prefWidth="188.0" text="Time" />
         </columns>
       </TableView>
       <ScrollBar layoutX="1161.0" layoutY="289.0" orientation="VERTICAL" prefHeight="407.0" prefWidth="21.0" />
