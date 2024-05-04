@@ -133,7 +133,8 @@ public class DatabaseDriver {
                     review.setId(ID.getInt(1));
                 }
             }
-            calculateAverageRating(review.getCourse());
+            double newAvgRating = getAverageRating(review.getCourse());
+            updateCourseRating(review.getCourse(), newAvgRating);
         }
     }
 
@@ -325,9 +326,7 @@ public class DatabaseDriver {
                 course.setCourseNumber(resultSet.getInt("CourseNumber"));
                 course.setTitle(resultSet.getString("Title"));
                 course.setMnemonic(resultSet.getString("Mnemonic"));
-                if(resultSet.getDouble("Rating") != 0.0){
-                    course.setAverageRating(resultSet.getDouble("Rating"));
-                }
+                course.setAverageRating(resultSet.getDouble("Rating"));
                 courses.add(course);
             }
             return courses;
@@ -347,9 +346,7 @@ public class DatabaseDriver {
                 course.setCourseNumber(number);
                 course.setTitle(resultSet.getString("Title"));
                 course.setMnemonic(mnemonic);
-                if(resultSet.getDouble("Rating") != 0.0){
-                    course.setAverageRating(resultSet.getDouble("Rating"));
-                }
+                course.setAverageRating(resultSet.getDouble("Rating"));
                 courses.add(course);
             }
             return courses;
@@ -369,9 +366,7 @@ public class DatabaseDriver {
                 course.setCourseNumber(resultSet.getInt("CourseNumber"));
                 course.setTitle(resultSet.getString("Title"));
                 course.setMnemonic(mnemonic);
-                if(resultSet.getDouble("Rating") != 0.0){
-                    course.setAverageRating(resultSet.getDouble("Rating"));
-                }
+                course.setAverageRating(resultSet.getDouble("Rating"));
                 courses.add(course);
             }
             return courses;
@@ -391,9 +386,7 @@ public class DatabaseDriver {
                 course.setCourseNumber(number);
                 course.setTitle(resultSet.getString("Title"));
                 course.setMnemonic(resultSet.getString("Mnemonic"));
-                if(resultSet.getDouble("Rating") != 0.0){
-                    course.setAverageRating(resultSet.getDouble("Rating"));
-                }
+                course.setAverageRating(resultSet.getDouble("Rating"));
                 courses.add(course);
             }
             return courses;
@@ -414,9 +407,7 @@ public class DatabaseDriver {
                 course.setCourseNumber(number);
                 course.setTitle(resultSet.getString("Title"));
                 course.setMnemonic(mnemonic);
-                if(resultSet.getDouble("Rating") != 0.0){
-                    course.setAverageRating(resultSet.getDouble("Rating"));
-                }
+                course.setAverageRating(resultSet.getDouble("Rating"));
                 courses.add(course);
             }
             return courses;
@@ -453,15 +444,6 @@ public class DatabaseDriver {
         return null;
     }
 
-    public void calculateAverageRating(Course course) throws SQLException {
-        List<Review> courseReviews = getReviewsByCourse(course);
-        double averageRating = 0.0;
-        for(Review review : courseReviews){
-            averageRating += review.getRating();
-        }
-        course.setAverageRating(averageRating/courseReviews.size());
-    }
-
     public void updateReview(Review review) throws SQLException {
         if(connection != null && !connection.isClosed()){
             PreparedStatement ps = connection.prepareStatement("UPDATE Reviews set Comment = ? and Rating = ? and Stamp = ?  where id = ?");
@@ -470,7 +452,29 @@ public class DatabaseDriver {
             ps.setTimestamp(3, review.getTimestamp());
             ps.setInt(4, review.getId());
             ps.executeUpdate();
-            calculateAverageRating(review.getCourse());
+            double newAvgRating = getAverageRating(review.getCourse());
+            updateCourseRating(review.getCourse(), newAvgRating);
+        }
+    }
+
+    public double getAverageRating(Course course) throws SQLException {
+        if(connection != null && !connection.isClosed()){
+            PreparedStatement ps = connection.prepareStatement("Select AVG(rating) from reviews where courseId = ?");
+            ps.setInt(1, course.getId());
+            ResultSet resultSet = ps.executeQuery();
+            if(resultSet.next()){
+                return resultSet.getDouble("AVG(rating)");
+            }
+        }
+        return 0.0;
+    }
+
+    public void updateCourseRating(Course course, double rating) throws SQLException {
+        if(connection != null && !connection.isClosed()){
+            PreparedStatement ps = connection.prepareStatement("UPDATE Courses set Rating = ? where ID = ?");
+            ps.setDouble(1, rating);
+            ps.setInt(2, course.getId());
+            ps.executeUpdate();
         }
     }
 

@@ -52,12 +52,11 @@ class DatabaseDriverTest {
             databaseDriver.disconnect();
 
     }
-//    @Test
-//    void clearTablesTest() throws SQLException {
-//        databaseDriver.clearTables();
-//        databaseDriver.commit();
-//        databaseDriver.disconnect();
-//    }
+   /* @Test
+    void clearTablesTest() throws SQLException {
+        databaseDriver.clearTables();
+        databaseDriver.commit();databaseDriver.disconnect();
+     }*/
 
 
     @Test

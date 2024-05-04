@@ -225,16 +225,16 @@ public class CourseSearchController {
     }
 
     @FXML
-    public void handleClickToChangeToReviews() throws IOException {
+    public void handleClickToChangeToReviews() throws IOException, SQLException {
         ObservableList<Course> courseObservableList;
         courseObservableList=courseTable.getSelectionModel().getSelectedItems();
-
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("course-reviews.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
 
         CourseReviewsSceneController controller = fxmlLoader.getController();
         try {
             controller.initialize(courseObservableList.get(0));
+            driver.disconnect();
         } catch (SQLException e) {
             e.printStackTrace();
         }

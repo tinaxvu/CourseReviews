@@ -108,6 +108,7 @@ public class CourseReviewsSceneController {
                 successLabel.setText("Review added!");
                 successLabel.setVisible(true);
                 databaseDriver.addReview(review);
+                databaseDriver.commit();
                 populateTable(selectedCourse);
             }
 

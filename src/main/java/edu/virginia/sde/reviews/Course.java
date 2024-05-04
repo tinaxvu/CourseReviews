@@ -1,5 +1,8 @@
 package edu.virginia.sde.reviews;
 
+import java.sql.SQLException;
+import java.util.List;
+
 public class Course {
     /*
      * This java class will represent the courses
@@ -76,8 +79,8 @@ public class Course {
         return averageRating;
     }
 
-    public void setAverageRating(double averageRating) {
-        this.averageRating = averageRating;
+    public void setAverageRating(double avgRating) {
+       averageRating = avgRating;
     }
 
     @Override
