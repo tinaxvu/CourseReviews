@@ -10,7 +10,10 @@
       <TextField fx:id="ratingTextField" layoutX="209.0" layoutY="187.0" prefHeight="26.0" prefWidth="140.0" promptText="Rating 1-5" />
       <Button fx:id="addReviewButton" layoutX="354.0" layoutY="186.0" mnemonicParsing="false" onAction="#handleAddReview" prefHeight="26.0" prefWidth="205.0" text="Add my rating" />
       <Button fx:id="backButton" mnemonicParsing="false" onAction="#handleBackButton" prefHeight="26.0" prefWidth="140.0" text="Back to course search" />
-      <Label fx:id="name" layoutX="207.0" layoutY="38.0" prefHeight="66.0" prefWidth="640.0" />
+      <Label fx:id="name" layoutX="207.0" layoutY="38.0" prefHeight="66.0" prefWidth="640.0">
+         <font>
+            <Font name="SansSerif Regular" size="30.0" />
+         </font></Label>
       <TableView fx:id="reviewsTable" layoutX="70.0" layoutY="275.0" prefHeight="422.0" prefWidth="1091.0">
         <columns>
           <TableColumn fx:id="commentColumn" prefWidth="803.0" text="Comment" />
@@ -18,13 +21,16 @@
             <TableColumn fx:id="timestampColumn" prefWidth="188.0" text="Time" />
         </columns>
       </TableView>
-      <ScrollBar layoutX="1161.0" layoutY="289.0" orientation="VERTICAL" prefHeight="407.0" prefWidth="21.0" />
       <Label fx:id="errorLabel" layoutX="212.0" layoutY="211.0" prefHeight="41.0" prefWidth="345.0" />
       <Text layoutX="710.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Average Rating:" wrappingWidth="222.0">
          <font>
             <Font name="SansSerif Regular" size="30.0" />
          </font>
       </Text>
+      <Label fx:id="averageRatingLabel" layoutX="933.0" layoutY="140.0" prefHeight="55.0" prefWidth="181.0">
+         <font>
+            <Font name="SansSerif Regular" size="30.0" />
+         </font></Label>
       <Label fx:id="successLabel" layoutX="207.0" layoutY="219.0" prefHeight="41.0" prefWidth="352.0" />
    </children>
 </AnchorPane>
