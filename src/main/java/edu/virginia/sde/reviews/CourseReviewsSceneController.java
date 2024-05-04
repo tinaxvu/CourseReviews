@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
+
 public class CourseReviewsSceneController {
     @FXML
     private Button addReviewButton;
@@ -44,6 +45,10 @@ public class CourseReviewsSceneController {
 
     @FXML
     private Button backButton;
+
+    @FXML
+    private Label averageRatingLabel;
+
     @FXML
     private TableView<Review> reviewsTable;
 
@@ -77,6 +82,7 @@ public class CourseReviewsSceneController {
             reviewsTable.setItems(observableReviews);
             name.setText(selectedCourse.getMnemonic() + " " + selectedCourse.getCourseNumber() + ": " + selectedCourse.getTitle());
             name.setVisible(true);
+            averageRatingLabel.setText(String.format("%.2f", databaseDriver.getAverageRating(selectedCourse)) + "/5.00");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -105,6 +111,7 @@ public class CourseReviewsSceneController {
                 Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                 Review review = new Review(user, selectedCourse, reviewComment, Double.parseDouble(ratingTextField.getText()), timestamp);
                 successLabel.setText("Review added!");
+                errorLabel.setVisible(false);
                 successLabel.setVisible(true);
                 databaseDriver.addReview(review);
                 databaseDriver.commit();
@@ -143,6 +150,7 @@ public class CourseReviewsSceneController {
         }
         return false;
     }
+
     public void handleBackButton() throws IOException {
         try {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("course-search.fxml"));
