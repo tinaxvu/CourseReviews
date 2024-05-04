@@ -46,9 +46,8 @@ public class MyReviewsController {
         this.username = username;
     }
 
-  /*  public void initialize() throws SQLException {
-        databaseDriver = new DatabaseDriver("course_reviews.sqlite");
-        databaseDriver.connect();
+  /*  public void initialize(Database driver) throws SQLException {
+        databaseDriver = driver;
         initializeColumns();
         loadCourses();
     }

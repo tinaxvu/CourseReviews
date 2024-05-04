@@ -61,12 +61,11 @@ public class CourseReviewsSceneController {
     private DatabaseDriver databaseDriver;
     private Course selectedCourse;
 
-    public void initialize(Course course) throws SQLException {
-        databaseDriver = new DatabaseDriver("course_reviews.sqlite");
+    public void initialize(DatabaseDriver driver, Course course) throws SQLException {
+        databaseDriver = driver;
         commentColumn.setCellValueFactory(new PropertyValueFactory<>("comment"));
         ratingColumn.setCellValueFactory(new PropertyValueFactory<>("rating"));
         timestampColumn.setCellValueFactory(new PropertyValueFactory<>("timestamp"));
-        databaseDriver.connect();
         populateTable(course);
     }
 
@@ -149,6 +148,8 @@ public class CourseReviewsSceneController {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("course-search.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
+        CourseSearchController controller = fxmlLoader.getController();
+        controller.initialize(databaseDriver);
         stage.setTitle("Course Search");
         stage.setScene(scene);
         Stage courseReview = (Stage) reviewsTable.getScene().getWindow();
@@ -156,6 +157,8 @@ public class CourseReviewsSceneController {
         stage.show();
     } catch (IOException e) {
         e.printStackTrace();
-    }
+    } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

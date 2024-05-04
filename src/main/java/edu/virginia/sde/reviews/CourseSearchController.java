@@ -56,14 +56,13 @@ public class CourseSearchController {
 
     private DatabaseDriver driver;
 
-    public void initialize() throws SQLException {
-        driver = new DatabaseDriver("course_reviews.sqlite");
+    public void initialize(DatabaseDriver driver) throws SQLException {
+        this.driver = driver;
         courseTitleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
         courseMnemonicColumn.setCellValueFactory(new PropertyValueFactory<>("mnemonic"));
         courseNumberColumn.setCellValueFactory(new PropertyValueFactory<>("courseNumber"));
         courseRatingColumn.setCellValueFactory(new PropertyValueFactory<>("averageRating"));
         courseIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        driver.connect();
         loadCourses();
     }
 
@@ -233,8 +232,7 @@ public class CourseSearchController {
 
         CourseReviewsSceneController controller = fxmlLoader.getController();
         try {
-            controller.initialize(courseObservableList.get(0));
-            driver.disconnect();
+            controller.initialize(driver, courseObservableList.get(0));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -257,8 +255,7 @@ public class CourseSearchController {
             Stage loginStage = (Stage) courseTable.getScene().getWindow();
             loginStage.close();
             stage.show();
-            driver.disconnect();
-        } catch (IOException | SQLException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

@@ -107,12 +107,13 @@ public class LoginSceneController {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("course-search.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = new Stage();
+            CourseSearchController controller = fxmlLoader.getController();
+            controller.initialize(databaseDriver);
             stage.setTitle("Course Search");
             stage.setScene(scene);
             Stage loginStage = (Stage) usernameField.getScene().getWindow();
             loginStage.close();
             stage.show();
-            databaseDriver.disconnect();
         } catch (IOException | SQLException e) {
             e.printStackTrace();
         }
