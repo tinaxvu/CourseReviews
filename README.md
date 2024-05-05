@@ -2,7 +2,7 @@
 # Homework 6 - Course Review Application
 
 ## Authors
-1) Name, netid, [GitHub profile name]
+1) Wadie Abboud, ucu8tt, wadie-Abboud
 2) Name, netid, [GitHub profile name]
 3) Name, netid, [GitHub profile name]
 4) Name, netid, [GitHub profile name]
@@ -17,9 +17,10 @@ List the primary contributions of each author. It is recommended to update this 
 
 ### [Author 1 - replace this with their name]
 
-* Author 1 contributions
-* as a bulleted list
-* each line starts with an asterisk and a space
+* Tested all database driver methods
+* Implemented get course search methods
+* Created implemented course search scene
+* 
 
 ### [Author 2 - replace this with their name]
 

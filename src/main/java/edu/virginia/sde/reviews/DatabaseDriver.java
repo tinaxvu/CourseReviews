@@ -469,11 +469,12 @@ public class DatabaseDriver {
 
     public void updateReview(Review review) throws SQLException {
         if(connection != null && !connection.isClosed()){
-            PreparedStatement ps = connection.prepareStatement("UPDATE Reviews set Comment = ? and Rating = ? and Stamp = ?  where id = ?");
+            PreparedStatement ps = connection.prepareStatement("UPDATE Reviews set Comment = ?,  Rating = ?,  Stamp = ?  where userid = ? and courseid = ?");
             ps.setString(1, review.getComment());
             ps.setDouble(2, review.getRating());
             ps.setTimestamp(3, review.getTimestamp());
-            ps.setInt(4, review.getId());
+            ps.setInt(4, review.getUser().getId());
+            ps.setInt(5, review.getCourse().getId());
             ps.executeUpdate();
             double newAvgRating = getAverageRating(review.getCourse());
             updateCourseRating(review.getCourse(), newAvgRating);

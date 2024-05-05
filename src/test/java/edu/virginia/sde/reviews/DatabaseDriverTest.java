@@ -302,5 +302,22 @@ class DatabaseDriverTest {
         assertTrue(trueTest);
         databaseDriver.disconnect();
     }
+    @Test
+    void updateReviewTest() throws SQLException {
+        databaseDriver.addUser(user1);
+        databaseDriver.addUser(user2);
+        databaseDriver.addCourse(Chem);
+        databaseDriver.addCourse(math);
+        databaseDriver.addCourse(english);
+        Review chemReview1 = new Review(user1,Chem, "This class is fantastic!!", 4.5,timestamp);
+        Review chemReview2 = new Review(user2,Chem, "This class is bad!!", 2,timestamp);
+        databaseDriver.addReview(chemReview2);
+        databaseDriver.addReview(chemReview1);
+        databaseDriver.commit();
+        Review chemReviewEdit = new Review(user1,Chem, "editTest", 1,timestamp);
+        databaseDriver.updateReview(chemReviewEdit);
+        databaseDriver.commit();
+        databaseDriver.disconnect();
+    }
 
 }
