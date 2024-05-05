@@ -61,6 +61,12 @@ public class CourseReviewsSceneController {
     @FXML
     private TableColumn<Review, Timestamp> timestampColumn;
 
+    @FXML
+    private Button deleteButton;
+
+    @FXML
+    private Label deleteLabel;
+
     private User user;
 
     private DatabaseDriver databaseDriver;
@@ -96,16 +102,17 @@ public class CourseReviewsSceneController {
     public void handleAddReview() throws SQLException {
         String reviewComment = reviewTextArea.getText();
         try {
-            if (!isValidRating(ratingTextField.getText())) {
-                System.out.println("Number Format Exception: invalid input.");
-                errorLabel.setText("Invalid rating");
-                errorLabel.setVisible(true);
-                successLabel.setVisible(false);
-
-            } else if (reviewAddedAlready()) {
+            if (reviewAddedAlready()) {
                 errorLabel.setText("You already made a review");
                 errorLabel.setVisible(true);
                 successLabel.setVisible(false);
+                deleteLabel.setVisible(false);
+
+            } else if (!isValidRating(ratingTextField.getText())) {
+                errorLabel.setText("Invalid rating");
+                errorLabel.setVisible(true);
+                successLabel.setVisible(false);
+                deleteLabel.setVisible(false);
 
             } else if (isValidRating(ratingTextField.getText()) && !reviewAddedAlready()) {
                 Timestamp timestamp = new Timestamp(System.currentTimeMillis());
@@ -116,6 +123,7 @@ public class CourseReviewsSceneController {
                 databaseDriver.addReview(review);
                 databaseDriver.commit();
                 populateTable(selectedCourse);
+                deleteLabel.setVisible(false);
             }
 
         } catch (SQLException | IOException e) {
@@ -123,6 +131,37 @@ public class CourseReviewsSceneController {
             errorLabel.setText("Database error");
             errorLabel.setVisible(true);
             successLabel.setVisible(false);
+        }
+    }
+
+    @FXML
+    public void handleDeleteButton() throws SQLException, IOException {
+        try {
+            if (reviewAddedAlready()) {
+                setUser(databaseDriver.getUserByUsername(CurrentUser.getInstance().getUsername()));
+                List<Review> reviews = databaseDriver.getReviewsByUser(user);
+
+                for (Review review : reviews) {
+                    if (review.getCourse().equals(selectedCourse)) {
+                        Review myReview = databaseDriver.getSpecificReview(user, selectedCourse);
+                        databaseDriver.deleteReview(myReview);
+                        databaseDriver.commit();
+                        populateTable(selectedCourse);
+                        deleteLabel.setText("Delete successful");
+                        deleteLabel.setVisible(true);
+                        errorLabel.setVisible(false);
+                        successLabel.setVisible(false);
+                        break;
+                    }
+                }
+            } else {
+                deleteLabel.setText("You haven't made a review yet");
+                deleteLabel.setVisible(true);
+                errorLabel.setVisible(false);
+                successLabel.setVisible(false);
+            }
+        } catch (SQLException e) {
+
         }
     }
 
