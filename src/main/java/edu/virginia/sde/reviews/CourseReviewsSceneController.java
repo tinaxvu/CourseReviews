@@ -65,6 +65,9 @@ public class CourseReviewsSceneController {
     private Button deleteButton;
 
     @FXML
+    private Button editButton;
+
+    @FXML
     private Label deleteLabel;
 
     private User user;
@@ -161,9 +164,47 @@ public class CourseReviewsSceneController {
                 successLabel.setVisible(false);
             }
         } catch (SQLException e) {
-
+            e.printStackTrace();
+            deleteLabel.setText("Database error");
+            deleteLabel.setVisible(true);
         }
     }
+
+    @FXML
+    public void handleEditButton() {
+        String reviewComment = reviewTextArea.getText();
+        try {
+            if (reviewAddedAlready() == false) {
+                errorLabel.setText("You haven't made a review yet");
+                errorLabel.setVisible(true);
+                successLabel.setVisible(false);
+                deleteLabel.setVisible(false);
+
+            } else if (!isValidRating(ratingTextField.getText())) {
+                errorLabel.setText("Invalid rating");
+                errorLabel.setVisible(true);
+                successLabel.setVisible(false);
+                deleteLabel.setVisible(false);
+
+            } else {
+                Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                Review review = new Review(user, selectedCourse, reviewComment, Double.parseDouble(ratingTextField.getText()), timestamp);
+                successLabel.setText("Review edited!");
+                errorLabel.setVisible(false);
+                successLabel.setVisible(true);
+                databaseDriver.updateReview(review);
+                databaseDriver.commit();
+                populateTable(selectedCourse);
+                deleteLabel.setVisible(false);
+            }
+        } catch (SQLException | IOException e) {
+            e.printStackTrace();
+            errorLabel.setText("Database error");
+            errorLabel.setVisible(true);
+        }
+
+    }
+
 
     public boolean isValidRating(String rating) {
         try {
