@@ -1,6 +1,7 @@
 package edu.virginia.sde.reviews;
 
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class Course {
@@ -13,32 +14,32 @@ public class Course {
      * Title
      * and the avg rating
      * */
-
+    private static final DecimalFormat df = new DecimalFormat("0.00");
     private int id;
     private int courseNumber;
     private String mnemonic;
     private String title;
-    private double averageRating;
+    private String averageRating;
     public Course(int id, int courseNumber, String mnemonic, String title, double averageRating) {
         this.id = id;
         this.courseNumber = courseNumber;
         this.mnemonic = mnemonic;
         this.title = title;
-        this.averageRating = averageRating;
+        this.averageRating = df.format(averageRating);
     }
     public Course(int courseNumber, String mnemonic, String title, double averageRating) {
         this.id = -999;
         this.courseNumber = courseNumber;
         this.mnemonic = mnemonic;
         this.title = title;
-        this.averageRating = averageRating;
+        this.averageRating = df.format(averageRating);
     }
     public Course(int courseNumber, String mnemonic, String title) {
         //this.id = id;
         this.courseNumber = courseNumber;
         this.mnemonic = mnemonic;
         this.title = title;
-        this.averageRating = 0.0;
+        this.averageRating = df.format(0.0);
     }
 
     public Course() { }
@@ -75,12 +76,12 @@ public class Course {
         this.title = title;
     }
 
-    public double getAverageRating() {
+    public String getAverageRating() {
         return averageRating;
     }
 
     public void setAverageRating(double avgRating) {
-       averageRating = avgRating;
+       averageRating = df.format(avgRating);
     }
 
     @Override

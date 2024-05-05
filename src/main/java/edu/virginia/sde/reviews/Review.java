@@ -17,10 +17,10 @@ public class Review {
     private User user;
     private Course course;
     private String reviewComment;
-    private double rating;
+    private int rating;
     private Timestamp timestamp;
 
-    public Review(User user, Course course, String reviewComment, double rating, Timestamp timestamp) {
+    public Review(User user, Course course, String reviewComment, int rating, Timestamp timestamp) {
         this.user = user;
         this.course = course;
         this.reviewComment = reviewComment;
@@ -28,7 +28,7 @@ public class Review {
         this.timestamp = timestamp;
         this.id = -999;
     }
-    public Review(int id, User user, Course course, String reviewComment, double rating, Timestamp timestamp) {
+    public Review(int id, User user, Course course, String reviewComment, int rating, Timestamp timestamp) {
         this.user = user;
         this.course = course;
         this.reviewComment = reviewComment;
@@ -63,11 +63,11 @@ public class Review {
         this.reviewComment = comment;
     }
 
-    public double getRating() {
+    public int getRating() {
         return rating;
     }
 
-    public void setRating(double rating) {
+    public void setRating(int rating) {
         this.rating = rating;
     }
 

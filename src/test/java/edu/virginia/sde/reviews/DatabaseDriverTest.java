@@ -63,7 +63,7 @@ class DatabaseDriverTest {
     void addReviewTest() throws SQLException {
         databaseDriver.addUser(user1);
         databaseDriver.addCourse(Chem);
-        Review review = new Review(user1,Chem, "This class is fantastic!!", 4.5,timestamp);
+        Review review = new Review(user1,Chem, "This class is fantastic!!", 4,timestamp);
         databaseDriver.addReview(review);
         databaseDriver.commit();
         databaseDriver.disconnect();
@@ -73,7 +73,7 @@ class DatabaseDriverTest {
     void getReviewByCourseTest() throws SQLException {
         databaseDriver.addUser(user1);
         databaseDriver.addCourse(Chem);
-        Review review = new Review(user1,Chem, "This class is fantastic!!", 4.5,timestamp);
+        Review review = new Review(user1,Chem, "This class is fantastic!!", 4,timestamp);
         databaseDriver.addReview(review);
         databaseDriver.commit();
         List<Review> getReviews = databaseDriver.getReviewsByCourse(Chem);
@@ -87,7 +87,7 @@ class DatabaseDriverTest {
         databaseDriver.addCourse(Chem);
         databaseDriver.addCourse(math);
         databaseDriver.addCourse(english);
-        Review chemReview1 = new Review(user1,Chem, "This class is fantastic!!", 4.5,timestamp);
+        Review chemReview1 = new Review(user1,Chem, "This class is fantastic!!", 4,timestamp);
         Review chemReview2 = new Review(user2,Chem, "This class is bad!!", 2,timestamp);
         Review mathReview1 = new Review(user1,math, "This class is so fun!!", 4,timestamp);
         Review mathReview2 = new Review(user2,math, "This class is so boring!!", 1,timestamp);
@@ -105,7 +105,7 @@ class DatabaseDriverTest {
     void getSpecificReviewTest() throws SQLException {
         databaseDriver.addUser(user1);
         databaseDriver.addCourse(Chem);
-        Review review = new Review(user1,Chem, "This class is fantastic!!", 4.5,timestamp);
+        Review review = new Review(user1,Chem, "This class is fantastic!!", 4,timestamp);
         databaseDriver.addReview(review);
         databaseDriver.commit();
         Review myReview = databaseDriver.getSpecificReview(user1, Chem);
@@ -116,7 +116,7 @@ class DatabaseDriverTest {
     void getReviewByUserTest() throws SQLException {
         databaseDriver.addUser(user1);
         databaseDriver.addCourse(Chem);
-        Review review = new Review(user1,Chem, "This class is fantastic!!", 4.5,timestamp);
+        Review review = new Review(user1,Chem, "This class is fantastic!!", 4,timestamp);
         databaseDriver.addReview(review);
         databaseDriver.commit();
         List<Review> getReviews = databaseDriver.getReviewsByUser(user1);
@@ -130,7 +130,7 @@ class DatabaseDriverTest {
         databaseDriver.addCourse(Chem);
         databaseDriver.addCourse(math);
         databaseDriver.addCourse(english);
-        Review chemReview1 = new Review(user1,Chem, "This class is fantastic!!", 4.5,timestamp);
+        Review chemReview1 = new Review(user1,Chem, "This class is fantastic!!", 4,timestamp);
         Review chemReview2 = new Review(user2,Chem, "This class is bad!!", 2,timestamp);
         Review mathReview1 = new Review(user1,math, "This class is so fun!!", 4,timestamp);
         Review mathReview2 = new Review(user2,math, "This class is so boring!!", 1,timestamp);
@@ -171,7 +171,7 @@ class DatabaseDriverTest {
         databaseDriver.addCourse(Chem);
         databaseDriver.addCourse(math);
         databaseDriver.addCourse(english);
-        Review chemReview1 = new Review(user1,Chem, "This class is fantastic!!", 4.5,timestamp);
+        Review chemReview1 = new Review(user1,Chem, "This class is fantastic!!", 4,timestamp);
         Review chemReview2 = new Review(user2,Chem, "This class is bad!!", 2,timestamp);
         Review mathReview1 = new Review(user1,math, "This class is so fun!!", 4,timestamp);
         Review mathReview2 = new Review(user2,math, "This class is so boring!!", 1,timestamp);
@@ -309,7 +309,7 @@ class DatabaseDriverTest {
         databaseDriver.addCourse(Chem);
         databaseDriver.addCourse(math);
         databaseDriver.addCourse(english);
-        Review chemReview1 = new Review(user1,Chem, "This class is fantastic!!", 4.5,timestamp);
+        Review chemReview1 = new Review(user1,Chem, "This class is fantastic!!", 4,timestamp);
         Review chemReview2 = new Review(user2,Chem, "This class is bad!!", 2,timestamp);
         databaseDriver.addReview(chemReview2);
         databaseDriver.addReview(chemReview1);

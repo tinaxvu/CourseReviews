@@ -160,7 +160,7 @@ public class CourseReviewsSceneController {
 
             } else if (isValidRating(ratingTextField.getText()) && !reviewAddedAlready()) {
                 Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                Review review = new Review(user, selectedCourse, reviewComment, Double.parseDouble(ratingTextField.getText()), timestamp);
+                Review review = new Review(user, selectedCourse, reviewComment, Integer.parseInt(ratingTextField.getText()), timestamp);
                 successLabel.setText("Review added!");
                 errorLabel.setVisible(false);
                 successLabel.setVisible(true);
@@ -223,7 +223,7 @@ public class CourseReviewsSceneController {
 
             } else {
                 Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                Review review = new Review(user, selectedCourse, reviewComment, Double.parseDouble(ratingTextField.getText()), timestamp);
+                Review review = new Review(user, selectedCourse, reviewComment, Integer.parseInt(ratingTextField.getText()), timestamp);
                 successLabel.setText("Review edited!");
                 errorLabel.setVisible(false);
                 successLabel.setVisible(true);
