@@ -102,6 +102,17 @@ class DatabaseDriverTest {
         databaseDriver.disconnect();
     }
     @Test
+    void getSpecificReviewTest() throws SQLException {
+        databaseDriver.addUser(user1);
+        databaseDriver.addCourse(Chem);
+        Review review = new Review(user1,Chem, "This class is fantastic!!", 4.5,timestamp);
+        databaseDriver.addReview(review);
+        databaseDriver.commit();
+        Review myReview = databaseDriver.getSpecificReview(user1, Chem);
+        assertEquals(review.getId(),myReview.getId());
+        databaseDriver.disconnect();
+    }
+    @Test
     void getReviewByUserTest() throws SQLException {
         databaseDriver.addUser(user1);
         databaseDriver.addCourse(Chem);
