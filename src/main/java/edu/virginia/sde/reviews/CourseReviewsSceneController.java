@@ -241,8 +241,8 @@ public class CourseReviewsSceneController {
     public boolean isValidRating(String rating) {
         try {
             if (rating != null) {
-                Double.parseDouble(rating);
-                return true;
+                int intRating = Integer.parseInt(rating);
+                return intRating >= 1 && intRating <= 5;
             }
             return false;
         } catch (NumberFormatException ex) {
