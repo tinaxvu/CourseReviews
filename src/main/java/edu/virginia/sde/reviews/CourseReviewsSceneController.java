@@ -142,21 +142,15 @@ public class CourseReviewsSceneController {
         try {
             if (reviewAddedAlready()) {
                 setUser(databaseDriver.getUserByUsername(CurrentUser.getInstance().getUsername()));
-                List<Review> reviews = databaseDriver.getReviewsByUser(user);
+                Review myReview = databaseDriver.getSpecificReview(user, selectedCourse);
+                databaseDriver.deleteReview(myReview);
+                databaseDriver.commit();
+                populateTable(selectedCourse);
+                deleteLabel.setText("Delete successful");
+                deleteLabel.setVisible(true);
+                errorLabel.setVisible(false);
+                successLabel.setVisible(false);
 
-                for (Review review : reviews) {
-                    if (review.getCourse().equals(selectedCourse)) {
-                        Review myReview = databaseDriver.getSpecificReview(user, selectedCourse);
-                        databaseDriver.deleteReview(myReview);
-                        databaseDriver.commit();
-                        populateTable(selectedCourse);
-                        deleteLabel.setText("Delete successful");
-                        deleteLabel.setVisible(true);
-                        errorLabel.setVisible(false);
-                        successLabel.setVisible(false);
-                        break;
-                    }
-                }
             } else {
                 deleteLabel.setText("You haven't made a review yet");
                 deleteLabel.setVisible(true);
@@ -174,7 +168,7 @@ public class CourseReviewsSceneController {
     public void handleEditButton() {
         String reviewComment = reviewTextArea.getText();
         try {
-            if (reviewAddedAlready() == false) {
+            if (!reviewAddedAlready()) {
                 errorLabel.setText("You haven't made a review yet");
                 errorLabel.setVisible(true);
                 successLabel.setVisible(false);
