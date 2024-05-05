@@ -6,10 +6,10 @@ public class MyReviewObject{
 
     private String mnemonic;
     private int courseNum;
-    private double rating;
+    private int rating;
 
 
-    public MyReviewObject(String mnemonic, int courseNum, double rating) {
+    public MyReviewObject(String mnemonic, int courseNum, int rating) {
        this.mnemonic = mnemonic;
        this.courseNum = courseNum;
        this.rating = rating;
@@ -19,7 +19,7 @@ public class MyReviewObject{
         return rating;
     }
 
-    public void setRating(double rating) {
+    public void setRating(int rating) {
         this.rating = rating;
     }
 

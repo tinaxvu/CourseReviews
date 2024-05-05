@@ -509,7 +509,7 @@ public class DatabaseDriver {
             ResultSet resultSet = ps.executeQuery();
             List<MyReviewObject> myReviews = new ArrayList<>();
             while(resultSet.next()){
-                MyReviewObject MRO = new MyReviewObject(resultSet.getString("Mnemonic"), resultSet.getInt("CourseNumber"), resultSet.getDouble("Rating"));
+                MyReviewObject MRO = new MyReviewObject(resultSet.getString("Mnemonic"), resultSet.getInt("CourseNumber"), resultSet.getInt("Rating"));
                 myReviews.add(MRO);
             }
             return myReviews;

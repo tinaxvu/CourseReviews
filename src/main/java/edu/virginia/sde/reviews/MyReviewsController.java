@@ -35,7 +35,7 @@ public class MyReviewsController {
     private TableColumn<Course, Integer> courseNumberColumn;
 
     @FXML
-    private TableColumn<Course, Double> courseRatingColumn;
+    private TableColumn<Course, Integer> courseRatingColumn;
 
     @FXML
     private Button backButton;
