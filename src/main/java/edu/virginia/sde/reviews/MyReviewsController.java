@@ -26,7 +26,7 @@ import java.util.List;
 public class MyReviewsController {
 
     @FXML
-    private TableView<Review> reviewTable;
+    private TableView<MyReviewObject> reviewTable;
 
     @FXML
     private TableColumn<Course, String> courseMnemonicColumn;
@@ -83,16 +83,16 @@ public class MyReviewsController {
             throw new RuntimeException(e);
         }
     }*/
+    @FXML
     private void loadReviews() throws SQLException {
         User user = databaseDriver.getUserByUsername(CurrentUser.getInstance().getUsername());
         List<Review> reviews = databaseDriver.getReviewsByUser(user);
-        /*List<MyReviewObject> myReviews = new ArrayList<>();
+        List<MyReviewObject> myReviews = new ArrayList<>();
         for(Review review : reviews) {
-            myReviews.add(new MyReviewObject(review.getId(), review.getCourse().getMnemonic(),
-                    review.getCourse().getCourseNumber(), review.getUser(),
-                    ))
-        }*/
-        ObservableList<Review> observableList = FXCollections.observableList(reviews);
+            MyReviewObject MRO = new MyReviewObject(review.getId(), review.getCourse().getMnemonic(), review.getCourse().getCourseNumber(), review.getUser().getId(), review.getCourse().getId(), review.getComment(), review.getRating(), review.getTimestamp());
+            myReviews.add(MRO);
+        }
+        ObservableList<MyReviewObject> observableList = FXCollections.observableList(myReviews);
         reviewTable.setItems(observableList);
 
     }
