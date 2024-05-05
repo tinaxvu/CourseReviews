@@ -44,7 +44,10 @@ public class CourseReviewsSceneController {
     private TextField ratingTextField;
 
     @FXML
-    private Button backButton;
+    private Button backToCourseSearchButton;
+
+    @FXML
+    private Button backToMyReviewsButton;
 
     @FXML
     private Label averageRatingLabel;
@@ -248,7 +251,7 @@ public class CourseReviewsSceneController {
         return false;
     }
 
-    public void handleBackButton() throws IOException {
+    public void handleBackToCourseSearchButton() throws IOException {
         try {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("course-search.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
@@ -263,6 +266,25 @@ public class CourseReviewsSceneController {
     } catch (IOException e) {
         e.printStackTrace();
     } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void handleBackToMyReviewsButton() throws IOException {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("my-reviews.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = new Stage();
+            MyReviewsController controller = fxmlLoader.getController();
+            controller.initialize(databaseDriver);
+            stage.setTitle("My Reviews");
+            stage.setScene(scene);
+            Stage courseReview = (Stage) reviewsTable.getScene().getWindow();
+            courseReview.close();
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
