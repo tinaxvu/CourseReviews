@@ -83,6 +83,23 @@ public class CourseReviewsSceneController {
         populateTable(course);
     }
 
+    public void initialize(DatabaseDriver driver, MyReviewObject review) throws SQLException {
+        databaseDriver = driver;
+        commentColumn.setCellValueFactory(new PropertyValueFactory<>("comment"));
+        ratingColumn.setCellValueFactory(new PropertyValueFactory<>("rating"));
+        timestampColumn.setCellValueFactory(new PropertyValueFactory<>("timestamp"));
+
+        // Since we don't have a Course object associated directly with MyReviewObject,
+        // we can load the reviews based on mnemonic and course number.
+        Course course = databaseDriver.getCoursesByMnemonicNumber(review.getMnemonic(), review.getCourseNum()).get(0);
+        if (course != null) {
+            populateTable(course);
+
+            // Handle the case where the course associated with the review is not found.
+            // You can display an error message or handle it based on your application's requirements.
+        }
+    }
+
     public void populateTable(Course course) throws SQLException {
         try {
             this.selectedCourse = course;
