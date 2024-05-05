@@ -16,14 +16,9 @@
 
     <TableView fx:id="reviewTable" layoutX="89.0" layoutY="100.0" prefHeight="540.0" prefWidth="1100.0">
         <columns>
-            <TableColumn fx:id="reviewIDColumn" prefWidth="62.71107482910156" text="ReviewID" />
-            <TableColumn fx:id="courseMnemonicColumn" prefWidth="65.11737060546875" text="Mnemonic" />
-            <TableColumn fx:id="courseNumberColumn" prefWidth="51.57948303222656" text="Number" />
-         <TableColumn fx:id="reviewUserIDColumn" prefWidth="50.912109375" text="UserID" />
-         <TableColumn fx:id="courseIDColumn" prefWidth="72.72695922851562" text="CourseID" />
-         <TableColumn fx:id="reviewCommentColumn" prefWidth="668.7730712890625" text="Comment" />
-         <TableColumn fx:id="courseRatingColumn" prefWidth="52.330078125" text="Rating" />
-         <TableColumn fx:id="reviewTimestampTableColumn" prefWidth="76.6553955078125" text="Timestamp" />
+            <TableColumn fx:id="courseMnemonicColumn" onEditStart="#loadReviews" prefWidth="331.3409729003906" text="Mnemonic" />
+            <TableColumn fx:id="courseNumberColumn" onEditStart="#loadReviews" prefWidth="459.15907287597656" text="Number" />
+         <TableColumn fx:id="courseRatingColumn" onEditStart="#loadReviews" prefWidth="308.8417205810547" text="Rating" />
         </columns>
     </TableView>
 

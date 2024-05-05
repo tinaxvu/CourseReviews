@@ -32,21 +32,6 @@ public class MyReviewsController {
     private TableColumn<Course, String> courseMnemonicColumn;
 
     @FXML
-    private TableColumn<Review, String> reviewCommentColumn;
-
-    @FXML
-    private TableColumn<Review, Integer> reviewIDColumn;
-
-    @FXML
-    private TableColumn<Review, Integer> reviewUserIDColumn;
-
-    @FXML
-    private TableColumn<Review, Integer> courseIDColumn;
-
-    @FXML
-    private TableColumn<Review, Timestamp> reviewTimestampTableColumn;
-
-    @FXML
     private TableColumn<Course, Integer> courseNumberColumn;
 
     @FXML
@@ -64,34 +49,15 @@ public class MyReviewsController {
     }
 
     private void initializeColumns() {
-        courseMnemonicColumn.setCellValueFactory(new PropertyValueFactory<>("Mnemonic"));
-        reviewCommentColumn.setCellValueFactory(new PropertyValueFactory<>("Comment"));
-        reviewIDColumn.setCellValueFactory(new PropertyValueFactory<>("ReviewID"));
-        reviewUserIDColumn.setCellValueFactory(new PropertyValueFactory<>("UserID"));
-        courseIDColumn.setCellValueFactory(new PropertyValueFactory<>("CourseID"));
-        courseRatingColumn.setCellValueFactory(new PropertyValueFactory<>("Rating"));
-        reviewTimestampTableColumn.setCellValueFactory(new PropertyValueFactory<>("Timestamp"));
-        courseNumberColumn.setCellValueFactory(new PropertyValueFactory<>("Number"));
+        courseMnemonicColumn.setCellValueFactory(new PropertyValueFactory<>("mnemonic"));
+        courseRatingColumn.setCellValueFactory(new PropertyValueFactory<>("rating"));
+        courseNumberColumn.setCellValueFactory(new PropertyValueFactory<>("courseNum"));
     }
 
-   /*private void loadCourses() {
-        try {
-            List<Course> courses = databaseDriver.getCourses();
-            ObservableList<Course> observableCourses = FXCollections.observableList(courses);
-            courseTable.setItems(observableCourses);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }*/
     @FXML
     private void loadReviews() throws SQLException {
         User user = databaseDriver.getUserByUsername(CurrentUser.getInstance().getUsername());
-        List<Review> reviews = databaseDriver.getReviewsByUser(user);
-        List<MyReviewObject> myReviews = new ArrayList<>();
-        for(Review review : reviews) {
-            MyReviewObject MRO = new MyReviewObject(review.getId(), review.getCourse().getMnemonic(), review.getCourse().getCourseNumber(), review.getUser().getId(), review.getCourse().getId(), review.getComment(), review.getRating(), review.getTimestamp());
-            myReviews.add(MRO);
-        }
+        List<MyReviewObject> myReviews = databaseDriver.getMyReviews(user);
         ObservableList<MyReviewObject> observableList = FXCollections.observableList(myReviews);
         reviewTable.setItems(observableList);
 

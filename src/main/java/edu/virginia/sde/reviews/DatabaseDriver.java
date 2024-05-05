@@ -501,6 +501,21 @@ public class DatabaseDriver {
         }
     }
 
+    public List<MyReviewObject> getMyReviews(User user) throws SQLException {
+        if(connection != null && !connection.isClosed()){
+            PreparedStatement ps = connection.prepareStatement("SELECT r.Rating, c.Mnemonic, c.CourseNumber FROM Reviews r JOIN Courses c ON r.CourseID = c.ID WHERE r.UserID = ?");
+            ps.setInt(1, user.getId());
+            ResultSet resultSet = ps.executeQuery();
+            List<MyReviewObject> myReviews = new ArrayList<>();
+            while(resultSet.next()){
+                MyReviewObject MRO = new MyReviewObject(resultSet.getString("Mnemonic"), resultSet.getInt("CourseNumber"), resultSet.getDouble("Rating"));
+                myReviews.add(MRO);
+            }
+            return myReviews;
+        }
+        return null;
+    }
+
 
 
 }

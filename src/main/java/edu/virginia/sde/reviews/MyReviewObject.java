@@ -6,24 +6,41 @@ public class MyReviewObject{
 
     private String mnemonic;
     private int courseNum;
-    private int id;
-    private int userID;
-    private int courseID;
-    private String reviewComment;
     private double rating;
-    private Timestamp timestamp;
 
-    public MyReviewObject(int id, String mnemonic, int courseNum, int userID, int courseID, String reviewComment, double rating, Timestamp timestamp) {
+
+    public MyReviewObject(String mnemonic, int courseNum, double rating) {
        this.mnemonic = mnemonic;
        this.courseNum = courseNum;
-       this.id = id;
-       this.userID = userID;
-       this.courseID = courseID;
-       this.reviewComment = reviewComment;
        this.rating = rating;
-       this.timestamp = timestamp;
     }
 
+    public double getRating() {
+        return rating;
+    }
 
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
 
+    public String getMnemonic() {
+        return mnemonic;
+    }
+
+    public void setMnemonic(String mnemonic) {
+        this.mnemonic = mnemonic;
+    }
+
+    public int getCourseNum() {
+        return courseNum;
+    }
+
+    public void setCourseNum(int courseNum) {
+        this.courseNum = courseNum;
+    }
+
+    @Override
+    public String toString() {
+        return "MyReviewObject [mnemonic=" + mnemonic + ", courseNum=" + courseNum + ", rating=" + rating + "]";
+    }
 }
