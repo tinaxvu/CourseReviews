@@ -45,7 +45,7 @@
          <center>
               <Label fx:id="errorLabel" alignment="CENTER" textFill="red" visible="false" BorderPane.alignment="CENTER">
                <font>
-                  <Font name="SansSerif Regular" size="12.0" />
+                  <Font name="SansSerif Bold" size="12.0" />
                </font></Label>
          </center>
       </BorderPane>

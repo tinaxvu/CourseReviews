@@ -19,7 +19,7 @@
       <Button fx:id="backToMyReviewsButton" layoutX="40.0" layoutY="55.0" mnemonicParsing="false" onAction="#handleBackToMyReviewsButton" prefHeight="26.0" prefWidth="147.0" text="Back to My Reviews" />
       <Label fx:id="name" layoutX="207.0" layoutY="38.0" prefHeight="66.0" prefWidth="1047.0">
          <font>
-            <Font name="SansSerif Regular" size="28.0" />
+            <Font name="SansSerif Bold" size="28.0" />
          </font></Label>
       <TableView fx:id="reviewsTable" layoutX="70.0" layoutY="275.0" prefHeight="422.0" prefWidth="1137.0">
         <columns>
@@ -31,12 +31,12 @@
       <Label fx:id="errorLabel" layoutX="212.0" layoutY="211.0" prefHeight="41.0" prefWidth="345.0" />
       <Text layoutX="710.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Average Rating:" wrappingWidth="222.0">
          <font>
-            <Font name="SansSerif Regular" size="30.0" />
+            <Font name="SansSerif Bold" size="30.0" />
          </font>
       </Text>
       <Label fx:id="averageRatingLabel" layoutX="933.0" layoutY="140.0" prefHeight="55.0" prefWidth="181.0">
          <font>
-            <Font name="SansSerif Regular" size="30.0" />
+            <Font name="SansSerif Bold" size="30.0" />
          </font></Label>
       <Label fx:id="successLabel" layoutX="207.0" layoutY="219.0" prefHeight="41.0" prefWidth="352.0" />
       <Button fx:id="deleteButton" layoutX="70.0" layoutY="240.0" mnemonicParsing="false" onAction="#handleDeleteButton" text="Delete my review" />

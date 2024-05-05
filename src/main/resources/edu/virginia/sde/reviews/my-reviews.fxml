@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.virginia.sde.reviews.MyReviewsController">
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.virginia.sde.reviews.MyReviewsController">
     <Label layoutX="517.0" layoutY="-14.0" prefHeight="100.0" prefWidth="245.0" text="My Reviews" textFill="#252525">
         <font>
             <Font name="SansSerif Bold" size="32.0" />
@@ -22,9 +19,15 @@
         </columns>
     </TableView>
 
-    <Button fx:id="backButton" layoutX="32.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleBackButton" text="Back" />
+    <Button fx:id="backButton" layoutX="15.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleBackButton" text="Back To Course Search">
+      <font>
+         <Font name="SansSerif Bold" size="12.0" />
+      </font></Button>
 
     <Label fx:id="successLabel" layoutX="500.0" layoutY="660.0" text="Success" textFill="#06f417" visible="false" />
     <Label fx:id="errorLabel" layoutX="500.0" layoutY="660.0" text="Error" textFill="#f60200" visible="false" />
-    <Button layoutX="80.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleClickToChangeToReviews" text="Go to reviews page of selected review" />
+    <Button layoutX="180.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleClickToChangeToReviews" text="Go to reviews page of selected review">
+      <font>
+         <Font name="SansSerif Bold" size="12.0" />
+      </font></Button>
 </AnchorPane>
