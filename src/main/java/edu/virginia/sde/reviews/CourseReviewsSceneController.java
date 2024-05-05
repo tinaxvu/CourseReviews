@@ -44,7 +44,10 @@ public class CourseReviewsSceneController {
     private TextField ratingTextField;
 
     @FXML
-    private Button backButton;
+    private Button backToCourseSearchButton;
+
+    @FXML
+    private Button backToMyReviewsButton;
 
     @FXML
     private Label averageRatingLabel;
@@ -81,6 +84,23 @@ public class CourseReviewsSceneController {
         ratingColumn.setCellValueFactory(new PropertyValueFactory<>("rating"));
         timestampColumn.setCellValueFactory(new PropertyValueFactory<>("timestamp"));
         populateTable(course);
+    }
+
+    public void initialize(DatabaseDriver driver, MyReviewObject review) throws SQLException {
+        databaseDriver = driver;
+        commentColumn.setCellValueFactory(new PropertyValueFactory<>("comment"));
+        ratingColumn.setCellValueFactory(new PropertyValueFactory<>("rating"));
+        timestampColumn.setCellValueFactory(new PropertyValueFactory<>("timestamp"));
+
+        // Since we don't have a Course object associated directly with MyReviewObject,
+        // we can load the reviews based on mnemonic and course number.
+        Course course = databaseDriver.getCoursesByMnemonicNumber(review.getMnemonic(), review.getCourseNum()).get(0);
+        if (course != null) {
+            populateTable(course);
+
+            // Handle the case where the course associated with the review is not found.
+            // You can display an error message or handle it based on your application's requirements.
+        }
     }
 
     public void populateTable(Course course) throws SQLException {
@@ -225,7 +245,7 @@ public class CourseReviewsSceneController {
         return false;
     }
 
-    public void handleBackButton() throws IOException {
+    public void handleBackToCourseSearchButton() throws IOException {
         try {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("course-search.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
@@ -240,6 +260,25 @@ public class CourseReviewsSceneController {
     } catch (IOException e) {
         e.printStackTrace();
     } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void handleBackToMyReviewsButton() throws IOException {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("my-reviews.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = new Stage();
+            MyReviewsController controller = fxmlLoader.getController();
+            controller.initialize(databaseDriver);
+            stage.setTitle("My Reviews");
+            stage.setScene(scene);
+            Stage courseReview = (Stage) reviewsTable.getScene().getWindow();
+            courseReview.close();
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }

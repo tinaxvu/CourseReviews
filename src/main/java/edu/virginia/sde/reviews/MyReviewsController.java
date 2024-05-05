@@ -83,4 +83,27 @@ public class MyReviewsController {
         }
     }
 
+    @FXML
+    private void handleClickToChangeToReviews() {
+        MyReviewObject selectedReview = reviewTable.getSelectionModel().getSelectedItem();
+        if (selectedReview != null) {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("course-reviews.fxml"));
+                Scene scene = new Scene(fxmlLoader.load());
+                Stage stage = new Stage();
+                CourseReviewsSceneController controller = fxmlLoader.getController();
+                controller.initialize(databaseDriver, selectedReview);
+                stage.setTitle("Course Reviews");
+                stage.setScene(scene);
+                stage.show();
+                Stage myReviewsStage = (Stage) backButton.getScene().getWindow();
+                myReviewsStage.close();
+            } catch (IOException | SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+
 }
