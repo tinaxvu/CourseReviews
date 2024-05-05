@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.virginia.sde.reviews.MyReviewsController">
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.virginia.sde.reviews.MyReviewsController">
     <Label layoutX="517.0" layoutY="-14.0" prefHeight="100.0" prefWidth="245.0" text="My Reviews" textFill="#252525">
         <font>
             <Font name="SansSerif Bold" size="32.0" />
@@ -13,9 +16,14 @@
 
     <TableView fx:id="reviewTable" layoutX="89.0" layoutY="100.0" prefHeight="540.0" prefWidth="1100.0">
         <columns>
-            <TableColumn fx:id="courseMnemonicColumn" prefWidth="366.6666666666667" text="Course Mnemonic" />
-            <TableColumn fx:id="courseNumberColumn" prefWidth="366.6666666666667" text="Course Number" />
-            <TableColumn fx:id="courseRatingColumn" prefWidth="366.6666666666667" text="Rating" />
+            <TableColumn fx:id="reviewIDColumn" prefWidth="62.71107482910156" text="ReviewID" />
+            <TableColumn fx:id="courseMnemonicColumn" prefWidth="65.11737060546875" text="Mnemonic" />
+            <TableColumn fx:id="courseNumberColumn" prefWidth="51.57948303222656" text="Number" />
+         <TableColumn fx:id="reviewUserIDColumn" prefWidth="50.912109375" text="UserID" />
+         <TableColumn fx:id="courseIDColumn" prefWidth="72.72695922851562" text="CourseID" />
+         <TableColumn fx:id="reviewCommentColumn" prefWidth="668.7730712890625" text="Comment" />
+         <TableColumn fx:id="courseRatingColumn" prefWidth="52.330078125" text="Rating" />
+         <TableColumn fx:id="reviewTimestampTableColumn" prefWidth="76.6553955078125" text="Timestamp" />
         </columns>
     </TableView>
 

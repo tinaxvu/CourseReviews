@@ -250,6 +250,8 @@ public class CourseSearchController {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("my-reviews.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = new Stage();
+            MyReviewsController controller = fxmlLoader.getController();
+            controller.initialize(driver);
             stage.setTitle("My Reviews");
             stage.setScene(scene);
             Stage loginStage = (Stage) courseTable.getScene().getWindow();
@@ -257,6 +259,8 @@ public class CourseSearchController {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 }

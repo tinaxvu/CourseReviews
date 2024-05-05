@@ -176,14 +176,15 @@ public class DatabaseDriver {
             ResultSet resultSet = ps.executeQuery();
 
             List<Review> reviewsList = new ArrayList<>();
-            Review review = new Review();
-            Course course = new Course();
+
+
 
             while (resultSet.next()) {
                 PreparedStatement ps2 = connection.prepareStatement("SELECT * FROM COURSES WHERE ID = ?");
                 ps2.setInt(1, resultSet.getInt("CourseID"));
                 ResultSet courseResultSet = ps2.executeQuery();
-
+                Course course = new Course();
+                Review review = new Review();
                 if (courseResultSet.next()) {
                     course.setId(courseResultSet.getInt("ID"));
                     course.setCourseNumber(courseResultSet.getInt("CourseNumber"));

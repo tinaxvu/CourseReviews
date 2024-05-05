@@ -14,21 +14,37 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MyReviewsController {
 
     @FXML
-    private TableView<Course> courseTable;
-
+    private TableView<Review> reviewTable;
 
     @FXML
     private TableColumn<Course, String> courseMnemonicColumn;
 
+    @FXML
+    private TableColumn<Review, String> reviewCommentColumn;
+
+    @FXML
+    private TableColumn<Review, Integer> reviewIDColumn;
+
+    @FXML
+    private TableColumn<Review, Integer> reviewUserIDColumn;
+
+    @FXML
+    private TableColumn<Review, Integer> courseIDColumn;
+
+    @FXML
+    private TableColumn<Review, Timestamp> reviewTimestampTableColumn;
 
     @FXML
     private TableColumn<Course, Integer> courseNumberColumn;
@@ -40,26 +56,25 @@ public class MyReviewsController {
     private Button backButton;
 
     private DatabaseDriver databaseDriver;
-    private String username;
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-  /*  public void initialize(Database driver) throws SQLException {
+    public void initialize(DatabaseDriver driver) throws SQLException {
         databaseDriver = driver;
         initializeColumns();
-        loadCourses();
+        loadReviews();
     }
-    */
 
     private void initializeColumns() {
-        courseMnemonicColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMnemonic()));
-        courseNumberColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getCourseNumber()).asObject());
-        courseRatingColumn.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getAverageRating()).asObject());
+        courseMnemonicColumn.setCellValueFactory(new PropertyValueFactory<>("Mnemonic"));
+        reviewCommentColumn.setCellValueFactory(new PropertyValueFactory<>("Comment"));
+        reviewIDColumn.setCellValueFactory(new PropertyValueFactory<>("ReviewID"));
+        reviewUserIDColumn.setCellValueFactory(new PropertyValueFactory<>("UserID"));
+        courseIDColumn.setCellValueFactory(new PropertyValueFactory<>("CourseID"));
+        courseRatingColumn.setCellValueFactory(new PropertyValueFactory<>("Rating"));
+        reviewTimestampTableColumn.setCellValueFactory(new PropertyValueFactory<>("Timestamp"));
+        courseNumberColumn.setCellValueFactory(new PropertyValueFactory<>("Number"));
     }
 
-  /*  private void loadCourses() {
+   /*private void loadCourses() {
         try {
             List<Course> courses = databaseDriver.getCourses();
             ObservableList<Course> observableCourses = FXCollections.observableList(courses);
@@ -67,9 +82,20 @@ public class MyReviewsController {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-    }
+    }*/
+    private void loadReviews() throws SQLException {
+        User user = databaseDriver.getUserByUsername(CurrentUser.getInstance().getUsername());
+        List<Review> reviews = databaseDriver.getReviewsByUser(user);
+        /*List<MyReviewObject> myReviews = new ArrayList<>();
+        for(Review review : reviews) {
+            myReviews.add(new MyReviewObject(review.getId(), review.getCourse().getMnemonic(),
+                    review.getCourse().getCourseNumber(), review.getUser(),
+                    ))
+        }*/
+        ObservableList<Review> observableList = FXCollections.observableList(reviews);
+        reviewTable.setItems(observableList);
 
-   */
+    }
 
     @FXML
     private void handleBackButton(ActionEvent event) {
@@ -77,6 +103,8 @@ public class MyReviewsController {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("course-search.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = new Stage();
+            CourseSearchController controller = fxmlLoader.getController();
+            controller.initialize(databaseDriver);
             stage.setTitle("Course Search");
             stage.setScene(scene);
             Stage myReviewsStage = (Stage) backButton.getScene().getWindow();
@@ -84,6 +112,8 @@ public class MyReviewsController {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
