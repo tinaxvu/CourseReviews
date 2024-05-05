@@ -3,7 +3,7 @@
 
 ## Authors
 1) Wadie Abboud, ucu8tt, wadie-Abboud
-2) Name, netid, [GitHub profile name]
+2) Tina Vu, kmp3xr, tinaxvu
 3) Name, netid, [GitHub profile name]
 4) Name, netid, [GitHub profile name]
 
@@ -22,11 +22,11 @@ List the primary contributions of each author. It is recommended to update this 
 * Created implemented course search scene
 * 
 
-### [Author 2 - replace this with their name]
+### Tina Vu
 
-* Author 2 contributions
-* as a bulleted list
-* each line starts with an asterisk and a space
+* Some database driver methods
+* Implemented CourseReviewsSceneController
+* Created course reviews scene
 
 ### [Author 3 - replace this with their name]
 
