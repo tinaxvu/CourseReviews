@@ -58,7 +58,7 @@ public class DatabaseDriver {
         statement.executeUpdate(query);
         query = "CREATE TABLE IF NOT EXISTS COURSES(ID INTEGER PRIMARY KEY autoincrement, CourseNumber INTEGER, Mnemonic TEXT, Title TEXT, Rating REAL)";
         statement.executeUpdate(query);
-        query = "CREATE TABLE IF NOT EXISTS REVIEWS(ID INTEGER PRIMARY KEY autoincrement, UserID INTEGER, CourseID INTEGER,  Comment TEXT, Rating REAL, Stamp TIMESTAMP, Foreign Key(UserID) REFERENCES USERS(ID), Foreign Key (CourseID) REFERENCES Courses(ID))";
+        query = "CREATE TABLE IF NOT EXISTS REVIEWS(ID INTEGER PRIMARY KEY autoincrement, UserID INTEGER, CourseID INTEGER,  Comment TEXT, Rating INTEGER, Stamp TIMESTAMP, Foreign Key(UserID) REFERENCES USERS(ID), Foreign Key (CourseID) REFERENCES Courses(ID))";
         statement.executeUpdate(query);
         statement.close();
     }
@@ -82,7 +82,7 @@ public class DatabaseDriver {
                 ps.setInt(1, course.getCourseNumber());
                 ps.setString(2, course.getMnemonic());
                 ps.setString(3, course.getTitle());
-                ps.setDouble(4, course.getAverageRating());
+                ps.setDouble(4, Double.parseDouble(course.getAverageRating()));
                 ps.execute();
                 PreparedStatement ps2 = connection.prepareStatement("SELECT last_insert_rowid()");
                 ResultSet ID = ps2.executeQuery();
@@ -124,7 +124,7 @@ public class DatabaseDriver {
                 ps.setInt(1, review.getUser().getId());
                 ps.setInt(2, review.getCourse().getId());
                 ps.setString(3, review.getComment());
-                ps.setDouble(4, review.getRating());
+                ps.setInt(4, review.getRating());
                 ps.setTimestamp(5, review.getTimestamp());
                 ps.execute();
                 PreparedStatement ps2 = connection.prepareStatement("SELECT last_insert_rowid()");
@@ -157,7 +157,7 @@ public class DatabaseDriver {
                     user = new User(resultUser.getString("Username"), resultUser.getString("Password"));
                     user.setId(resultUser.getInt("UserID"));
                 }
-                reviews.add(new Review(result.getInt("ID"), user, course, result.getString("Comment"), result.getDouble("Rating"), result.getTimestamp("Stamp")));
+                reviews.add(new Review(result.getInt("ID"), user, course, result.getString("Comment"), result.getInt("Rating"), result.getTimestamp("Stamp")));
             }
             return reviews;
         }
@@ -196,7 +196,7 @@ public class DatabaseDriver {
                 review.setUser(user);
                 review.setCourse(course);
                 review.setComment(resultSet.getString("Comment"));
-                review.setRating(resultSet.getDouble("Rating"));
+                review.setRating(resultSet.getInt("Rating"));
                 review.setTimestamp(resultSet.getTimestamp("Stamp"));
                 reviewsList.add(review);
             }
@@ -219,7 +219,7 @@ public class DatabaseDriver {
                 review.setUser(user);
                 review.setCourse(course);
                 review.setComment(resultSet.getString("Comment"));
-                review.setRating(resultSet.getDouble("Rating"));
+                review.setRating(resultSet.getInt("Rating"));
                 review.setTimestamp(resultSet.getTimestamp("Stamp"));
                 return review;
             }
@@ -471,7 +471,7 @@ public class DatabaseDriver {
         if(connection != null && !connection.isClosed()){
             PreparedStatement ps = connection.prepareStatement("UPDATE Reviews set Comment = ?,  Rating = ?,  Stamp = ?  where userid = ? and courseid = ?");
             ps.setString(1, review.getComment());
-            ps.setDouble(2, review.getRating());
+            ps.setInt(2, review.getRating());
             ps.setTimestamp(3, review.getTimestamp());
             ps.setInt(4, review.getUser().getId());
             ps.setInt(5, review.getCourse().getId());
