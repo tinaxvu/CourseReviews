@@ -204,6 +204,28 @@ public class DatabaseDriver {
         return null;
     }
 
+    public Review getSpecificReview(User user, Course course) throws SQLException {
+        if (connection != null && !connection.isClosed()) {
+            PreparedStatement ps = connection.prepareStatement("SELECT * from REVIEWS WHERE UserID = ? AND CourseID = ?");
+            ps.setInt(1, user.getId());
+            ps.setInt(2, course.getId());
+
+            ResultSet resultSet = ps.executeQuery();
+
+            Review review = new Review();
+            if (resultSet.next()) {
+                review.setId(resultSet.getInt("ID"));
+                review.setUser(user);
+                review.setCourse(course);
+                review.setComment(resultSet.getString("Comment"));
+                review.setRating(resultSet.getDouble("Rating"));
+                review.setTimestamp(resultSet.getTimestamp("Stamp"));
+                return review;
+            }
+        }
+        return null;
+    }
+
     /***
      * Delete a review from the list
      * @param review
