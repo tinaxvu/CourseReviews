@@ -17,5 +17,7 @@ public class CourseReviewsApplication extends Application {
         stage.setTitle("Login");
         stage.setScene(scene);
         stage.show();
+        LoginSceneController controller = fxmlLoader.getController();
+        controller.getUsernameField().requestFocus();
     }
 }

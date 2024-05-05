@@ -29,6 +29,7 @@ public class LoginSceneController {
     public void initialize() throws SQLException {
         databaseDriver = new DatabaseDriver("course_reviews.sqlite");
         databaseDriver.connect();
+        usernameField.requestFocus();
     }
 
     @FXML
@@ -123,5 +124,9 @@ public class LoginSceneController {
     private void handleCloseButton() {
         Stage stage = (Stage) usernameField.getScene().getWindow();
         stage.close();
+    }
+
+    public TextField getUsernameField() {
+        return usernameField;
     }
 }
