@@ -9,6 +9,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.fxml.FXMLLoader;
@@ -23,6 +24,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
+import javafx.scene.control.skin.TableColumnHeader;
 
 public class CourseReviewsSceneController {
     @FXML
@@ -109,12 +111,31 @@ public class CourseReviewsSceneController {
             List<Review> reviews = databaseDriver.getReviewsByCourse(selectedCourse);
             ObservableList<Review> observableReviews = FXCollections.observableList(reviews);
             reviewsTable.setItems(observableReviews);
+            autoResizeColumns(reviewsTable);
             name.setText(selectedCourse.getMnemonic() + " " + selectedCourse.getCourseNumber() + ": " + selectedCourse.getTitle());
             name.setVisible(true);
             averageRatingLabel.setText(String.format("%.2f", databaseDriver.getAverageRating(selectedCourse)) + "/5.00");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+
+    public static void autoResizeColumns(TableView<?> table) {
+        table.getColumns().stream().filter(TableColumn::isVisible).forEach(column -> {
+            Text t = new Text(column.getText());
+            double max = t.getLayoutBounds().getWidth();
+            for (int i = 0; i < table.getItems().size(); i++) {
+                if (column.getCellData(i) != null) {
+                    t = new Text(column.getCellData(i).toString());
+                    double calcWidth = t.getLayoutBounds().getWidth();
+                    if (calcWidth > max) {
+                        max = calcWidth;
+                    }
+                }
+            }
+            column.setPrefWidth(max + 10.0d);
+        });
     }
 
     public void setUser(User user) {
