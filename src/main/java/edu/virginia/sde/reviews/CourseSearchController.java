@@ -54,6 +54,9 @@ public class CourseSearchController {
     @FXML
     private TableColumn<Course, Double> courseRatingColumn;
 
+    @FXML
+    private Label selectErrorLabel;
+
     private DatabaseDriver driver;
 
     public void initialize(DatabaseDriver driver) throws SQLException {
@@ -225,24 +228,30 @@ public class CourseSearchController {
 
     @FXML
     public void handleClickToChangeToReviews() throws IOException, SQLException {
-        ObservableList<Course> courseObservableList;
-        courseObservableList=courseTable.getSelectionModel().getSelectedItems();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("course-reviews.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-
-        CourseReviewsSceneController controller = fxmlLoader.getController();
         try {
-            controller.initialize(driver, courseObservableList.get(0));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+            ObservableList<Course> courseObservableList;
+            courseObservableList = courseTable.getSelectionModel().getSelectedItems();
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("course-reviews.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
 
-        Stage stage = new Stage();
-        stage.setTitle("Course Search");
-        stage.setScene(scene);
-        Stage courseSearch = (Stage) courseTable.getScene().getWindow();
-        courseSearch.close();
-        stage.show();
+            CourseReviewsSceneController controller = fxmlLoader.getController();
+            try {
+                controller.initialize(driver, courseObservableList.get(0));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            Stage stage = new Stage();
+            stage.setTitle("Course Search");
+            stage.setScene(scene);
+            Stage courseSearch = (Stage) courseTable.getScene().getWindow();
+            courseSearch.close();
+            stage.show();
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Did not select a course");
+            selectErrorLabel.setText("You need to select a course");
+            selectErrorLabel.setVisible(true);
+        }
     }
 
     public void handleMyReviewsButton() {
