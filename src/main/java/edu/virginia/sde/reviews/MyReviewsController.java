@@ -29,13 +29,13 @@ public class MyReviewsController {
     private TableView<MyReviewObject> reviewTable;
 
     @FXML
-    private TableColumn<Course, String> courseMnemonicColumn;
+    private TableColumn<MyReviewObject, String> courseMnemonicColumn;
 
     @FXML
-    private TableColumn<Course, Integer> courseNumberColumn;
+    private TableColumn<MyReviewObject, Integer> courseNumberColumn;
 
     @FXML
-    private TableColumn<Course, Integer> courseRatingColumn;
+    private TableColumn<MyReviewObject, Integer> courseRatingColumn;
 
     @FXML
     private Button backButton;

@@ -4,7 +4,7 @@
 ## Authors
 1) Wadie Abboud, ucu8tt, wadie-Abboud
 2) Tina Vu, kmp3xr, tinaxvu
-3) Name, netid, [GitHub profile name]
+3) Aiden Rocha, atx2xs, Aiden-Rocha09
 4) Name, netid, [GitHub profile name]
 
 ## To Run
@@ -15,7 +15,7 @@
 
 List the primary contributions of each author. It is recommended to update this with your contributions after each coding session.:
 
-### [Author 1 - replace this with their name]
+### Wadie Abboud
 
 * Tested all database driver methods
 * Implemented get course search methods
@@ -28,13 +28,14 @@ List the primary contributions of each author. It is recommended to update this 
 * Implemented CourseReviewsSceneController
 * Created course reviews scene
 
-### [Author 3 - replace this with their name]
+### Aiden Rocha
 
-* Author 3 contributions
-* as a bulleted list
-* each line starts with an asterisk and a space
+* Planned DB Driver
+* Wrote methods for db Driver
+* Started course search scene and fixed myReviewController initialize
+* Implemented CourseSearchController
 
-### [Author 4 - replace this with their name]
+### Andrew Wagner
 
 * Author 4 contributions
 * as a bulleted list
