@@ -88,5 +88,8 @@
       <font>
          <Font name="SansSerif Bold" size="12.0" />
       </font></Button>
-   <Label fx:id="selectErrorLabel" layoutX="301.0" layoutY="324.0" prefHeight="20.0" prefWidth="184.0" />
+   <Label fx:id="selectErrorLabel" layoutX="301.0" layoutY="324.0" prefHeight="20.0" prefWidth="184.0" textFill="#ff4000">
+      <font>
+         <Font name="SansSerif Bold" size="12.0" />
+      </font></Label>
 </AnchorPane>
