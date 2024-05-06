@@ -90,12 +90,8 @@ public class CourseSearchController {
     {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("login-scene.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        Stage stage = new Stage();
-        stage.setTitle("Login");
+        Stage stage = (Stage) courseTable.getScene().getWindow();
         stage.setScene(scene);
-        Stage SearchStage = (Stage) courseTable.getScene().getWindow();
-        SearchStage.close();
-        stage.show();
         driver.disconnect();
     } catch (IOException | SQLException e) {
             e.printStackTrace();
@@ -241,12 +237,9 @@ public class CourseSearchController {
                 e.printStackTrace();
             }
 
-            Stage stage = new Stage();
-            stage.setTitle("Course Search");
+            Stage stage = (Stage) courseTable.getScene().getWindow();
             stage.setScene(scene);
-            Stage courseSearch = (Stage) courseTable.getScene().getWindow();
-            courseSearch.close();
-            stage.show();
+            stage.setTitle("Course Reviews");
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Did not select a course");
             selectErrorLabel.setText("You need to select a course");
@@ -258,14 +251,10 @@ public class CourseSearchController {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("my-reviews.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
-            Stage stage = new Stage();
+            Stage currentStage = (Stage) courseTable.getScene().getWindow();
+            currentStage.setScene(scene);
             MyReviewsController controller = fxmlLoader.getController();
             controller.initialize(driver);
-            stage.setTitle("My Reviews");
-            stage.setScene(scene);
-            Stage loginStage = (Stage) courseTable.getScene().getWindow();
-            loginStage.close();
-            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (SQLException e) {

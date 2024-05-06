@@ -68,14 +68,10 @@ public class MyReviewsController {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("course-search.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
-            Stage stage = new Stage();
+            Stage stage = (Stage) backButton.getScene().getWindow();
+            stage.setScene(scene);
             CourseSearchController controller = fxmlLoader.getController();
             controller.initialize(databaseDriver);
-            stage.setTitle("Course Search");
-            stage.setScene(scene);
-            Stage myReviewsStage = (Stage) backButton.getScene().getWindow();
-            myReviewsStage.close();
-            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (SQLException e) {
@@ -90,14 +86,10 @@ public class MyReviewsController {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("course-reviews.fxml"));
                 Scene scene = new Scene(fxmlLoader.load());
-                Stage stage = new Stage();
+                Stage stage = (Stage) backButton.getScene().getWindow();
+                stage.setScene(scene);
                 CourseReviewsSceneController controller = fxmlLoader.getController();
                 controller.initialize(databaseDriver, selectedReview);
-                stage.setTitle("Course Reviews");
-                stage.setScene(scene);
-                stage.show();
-                Stage myReviewsStage = (Stage) backButton.getScene().getWindow();
-                myReviewsStage.close();
             } catch (IOException | SQLException e) {
                 e.printStackTrace();
             }

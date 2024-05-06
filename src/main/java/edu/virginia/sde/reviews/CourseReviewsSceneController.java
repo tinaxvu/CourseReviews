@@ -265,16 +265,12 @@ public class CourseReviewsSceneController {
 
     public void handleBackToCourseSearchButton() throws IOException {
         try {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("course-search.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        Stage stage = new Stage();
-        CourseSearchController controller = fxmlLoader.getController();
-        controller.initialize(databaseDriver);
-        stage.setTitle("Course Search");
-        stage.setScene(scene);
-        Stage courseReview = (Stage) reviewsTable.getScene().getWindow();
-        courseReview.close();
-        stage.show();
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("course-search.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = (Stage) reviewsTable.getScene().getWindow();
+            stage.setScene(scene);
+            CourseSearchController controller = fxmlLoader.getController();
+            controller.initialize(databaseDriver);
     } catch (IOException e) {
         e.printStackTrace();
     } catch (SQLException e) {
@@ -286,14 +282,10 @@ public class CourseReviewsSceneController {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("my-reviews.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
-            Stage stage = new Stage();
+            Stage stage = (Stage) reviewsTable.getScene().getWindow();
+            stage.setScene(scene);
             MyReviewsController controller = fxmlLoader.getController();
             controller.initialize(databaseDriver);
-            stage.setTitle("My Reviews");
-            stage.setScene(scene);
-            Stage courseReview = (Stage) reviewsTable.getScene().getWindow();
-            courseReview.close();
-            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (SQLException e) {
