@@ -150,7 +150,7 @@ public class CourseReviewsSceneController {
                 deleteLabel.setVisible(false);
 
             } else if (!isValidRating(ratingTextField.getText())) {
-                errorLabel.setText("Invalid rating");
+                errorLabel.setText("Invalid rating. Enter an integer from 1-5.");
                 errorLabel.setVisible(true);
                 successLabel.setVisible(false);
                 deleteLabel.setVisible(false);
@@ -213,7 +213,7 @@ public class CourseReviewsSceneController {
                 deleteLabel.setVisible(false);
 
             } else if (!isValidRating(ratingTextField.getText())) {
-                errorLabel.setText("Invalid rating");
+                errorLabel.setText("Invalid rating. Enter an integer from 1-5.");
                 errorLabel.setVisible(true);
                 successLabel.setVisible(false);
                 deleteLabel.setVisible(false);
