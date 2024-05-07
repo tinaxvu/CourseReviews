@@ -43,8 +43,12 @@ public class LoginSceneController {
                 errorLabel.setVisible(false);
                 CurrentUser.init(usernameField.getText());
                 navigateToCourseSearchScreen();
-            } else {
-                errorLabel.setText("Invalid username/password");
+            } else if (usernameExists(username)){
+                errorLabel.setText("Incorrect password");
+                errorLabel.setVisible(true);
+                successLabel.setVisible(false);
+            } else{
+                errorLabel.setText("Username does not exist");
                 errorLabel.setVisible(true);
                 successLabel.setVisible(false);
             }

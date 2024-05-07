@@ -110,7 +110,7 @@ public class CourseSearchController {
                 addSuccessLabel.setVisible(false);
             }
             else if(!isNumberValid(newNumber)){
-                addErrorLabel.setText("Please enter a valid number");
+                addErrorLabel.setText("Please enter a 4 digit number");
                 addErrorLabel.setVisible(true);
                 addSuccessLabel.setVisible(false);
             }
@@ -148,6 +148,8 @@ public class CourseSearchController {
 
         try
         {
+            SearchErrorLabel.setVisible(false);
+            SearchSuccessLabel.setVisible(false);
             if (searchNumber.isEmpty() && searchTitle.isEmpty() && searchMnemonic.isEmpty()){
                 loadCourses();
             }
@@ -157,7 +159,7 @@ public class CourseSearchController {
                 SearchSuccessLabel.setVisible(false);
             }
             else if(!isNumberValid(searchNumber) && !searchNumber.isEmpty()){
-                SearchErrorLabel.setText("Please enter a valid number");
+                SearchErrorLabel.setText("Please enter a 4 digit number");
                 SearchErrorLabel.setVisible(true);
                 SearchSuccessLabel.setVisible(false);
             }

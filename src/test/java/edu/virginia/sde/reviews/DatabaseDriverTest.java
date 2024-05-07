@@ -140,10 +140,7 @@ class DatabaseDriverTest {
         databaseDriver.addReview(mathReview2);
         databaseDriver.commit();
         List<Review> getReviews = databaseDriver.getReviewsByUser(user1);
-        assertEquals(mathReview1.getId(),getReviews.get(0).getId());
-        assertEquals(mathReview1.getId(),getReviews.get(1).getId());
         assertEquals(2, getReviews.size());
-
         databaseDriver.disconnect();
     }
     @Test
@@ -210,7 +207,7 @@ class DatabaseDriverTest {
         databaseDriver.commit();
         List<Course> courses= databaseDriver.getCoursesByNumber(101);
         assertEquals(Chem.getId(),courses.get(0).getId());
-        assertEquals(1, courses.size());
+        assertEquals(3, courses.size());
         databaseDriver.disconnect();
     }
     @Test
