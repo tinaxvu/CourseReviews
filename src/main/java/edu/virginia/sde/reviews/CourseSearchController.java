@@ -243,7 +243,6 @@ public class CourseSearchController {
             stage.setScene(scene);
             stage.setTitle("Course Reviews");
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Did not select a course");
             selectErrorLabel.setText("You need to select a course");
             selectErrorLabel.setVisible(true);
         }
