@@ -190,7 +190,7 @@ public class CourseReviewsSceneController {
                 successLabel.setVisible(false);
 
             } else {
-                deleteLabel.setText("You haven't made a review yet");
+                deleteLabel.setText("Can't delete review. You haven't made a review yet");
                 deleteLabel.setVisible(true);
                 errorLabel.setVisible(false);
                 successLabel.setVisible(false);
@@ -207,7 +207,7 @@ public class CourseReviewsSceneController {
         String reviewComment = reviewTextArea.getText();
         try {
             if (!reviewAddedAlready()) {
-                errorLabel.setText("You haven't made a review yet");
+                errorLabel.setText("You haven't made a review yet. ");
                 errorLabel.setVisible(true);
                 successLabel.setVisible(false);
                 deleteLabel.setVisible(false);

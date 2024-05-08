@@ -105,21 +105,21 @@ public class CourseSearchController {
         try
         {
             if(!isMnemonicValid(newMnemonic)){
-                addErrorLabel.setText("Please enter a valid mnemonic");
+                addErrorLabel.setText("Invalid mnemonic. Please enter a 2-4 letter mnemonic.");
                 addErrorLabel.setVisible(true);
                 addSuccessLabel.setVisible(false);
             }
             else if(!isNumberValid(newNumber)){
-                addErrorLabel.setText("Please enter a 4 digit number");
+                addErrorLabel.setText("Invalid course number. Please enter a 4 digit number.");
                 addErrorLabel.setVisible(true);
                 addSuccessLabel.setVisible(false);
             }
             else if(!isTitleValid(newTitle)) {
-                addErrorLabel.setText("Please enter a valid title");
+                addErrorLabel.setText("Invalid title. Please enter a title that is 1-50 characters in length.");
                 addErrorLabel.setVisible(true);
                 addSuccessLabel.setVisible(false);
             }else if(driver.doesCourseExist(newMnemonic,newTitle,Integer.parseInt(newNumber))){
-                addErrorLabel.setText("Course already exists");
+                addErrorLabel.setText("Course already exists.");
                 addErrorLabel.setVisible(true);
                 addSuccessLabel.setVisible(false);
             }
@@ -154,17 +154,17 @@ public class CourseSearchController {
                 loadCourses();
             }
             if(!isMnemonicValid(searchMnemonic) && !searchMnemonic.isEmpty()){
-                SearchErrorLabel.setText("Please enter a valid mnemonic");
+                SearchErrorLabel.setText("Invalid mnemonic. Please enter a 2-4 letter mnemonic.");
                 SearchErrorLabel.setVisible(true);
                 SearchSuccessLabel.setVisible(false);
             }
             else if(!isNumberValid(searchNumber) && !searchNumber.isEmpty()){
-                SearchErrorLabel.setText("Please enter a 4 digit number");
+                SearchErrorLabel.setText("Invalid course number. Please enter a 4 digit number.");
                 SearchErrorLabel.setVisible(true);
                 SearchSuccessLabel.setVisible(false);
             }
             else if(!isTitleValid(searchTitle) && !searchTitle.isEmpty()) {
-                SearchErrorLabel.setText("Please enter a valid title");
+                SearchErrorLabel.setText("Invalid title. Please enter a title that is 1-50 characters in length.");
                 SearchErrorLabel.setVisible(true);
                 SearchSuccessLabel.setVisible(false);
             }

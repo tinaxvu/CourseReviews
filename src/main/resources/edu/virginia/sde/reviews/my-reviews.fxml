@@ -5,7 +5,7 @@
 <?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.virginia.sde.reviews.MyReviewsController">
-    <Label layoutX="517.0" layoutY="-14.0" prefHeight="100.0" prefWidth="245.0" text="My Reviews" textFill="#252525">
+    <Label layoutX="517.0" layoutY="-8.0" prefHeight="100.0" prefWidth="245.0" text="My Reviews" textFill="#252525">
         <font>
             <Font name="SansSerif Bold" size="32.0" />
         </font>
@@ -19,14 +19,14 @@
         </columns>
     </TableView>
 
-    <Button fx:id="backButton" layoutX="15.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleBackButton" text="Back To Course Search">
+    <Button fx:id="backButton" layoutX="9.0" layoutY="7.0" mnemonicParsing="false" onAction="#handleBackButton" prefHeight="33.0" prefWidth="151.0" text="Back To Course Search">
       <font>
          <Font name="SansSerif Bold" size="12.0" />
       </font></Button>
 
     <Label fx:id="successLabel" layoutX="500.0" layoutY="660.0" text="Success" textFill="#06f417" visible="false" />
     <Label fx:id="errorLabel" layoutX="500.0" layoutY="660.0" text="Error" textFill="#f60200" visible="false" />
-    <Button layoutX="180.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleClickToChangeToReviews" text="Go to reviews page of selected review">
+    <Button layoutX="89.0" layoutY="68.0" mnemonicParsing="false" onAction="#handleClickToChangeToReviews" text="Go to reviews page of selected review">
       <font>
          <Font name="SansSerif Bold" size="12.0" />
       </font></Button>
