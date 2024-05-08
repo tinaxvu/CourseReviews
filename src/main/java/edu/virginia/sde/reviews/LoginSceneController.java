@@ -29,6 +29,7 @@ public class LoginSceneController {
     public void initialize() throws SQLException {
         databaseDriver = new DatabaseDriver("course_reviews.sqlite");
         databaseDriver.connect();
+        databaseDriver.createTables();
         usernameField.requestFocus();
     }
 
