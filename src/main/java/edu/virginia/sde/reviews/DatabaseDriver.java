@@ -82,7 +82,7 @@ public class DatabaseDriver {
                 ps.setInt(1, course.getCourseNumber());
                 ps.setString(2, course.getMnemonic());
                 ps.setString(3, course.getTitle());
-                ps.setDouble(4, Double.parseDouble(course.getAverageRating()));
+                ps.setString(4, course.getAverageRating());
                 ps.execute();
                 PreparedStatement ps2 = connection.prepareStatement("SELECT last_insert_rowid()");
                 ResultSet ID = ps2.executeQuery();

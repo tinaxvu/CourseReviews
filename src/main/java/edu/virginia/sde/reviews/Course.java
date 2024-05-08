@@ -19,27 +19,36 @@ public class Course {
     private int courseNumber;
     private String mnemonic;
     private String title;
-    private String averageRating;
+    private String averageRating = "";
     public Course(int id, int courseNumber, String mnemonic, String title, double averageRating) {
         this.id = id;
         this.courseNumber = courseNumber;
         this.mnemonic = mnemonic;
         this.title = title;
-        this.averageRating = df.format(averageRating);
+        if(averageRating != 0.0){
+            this.averageRating = df.format(averageRating);
+        }else{
+            this.averageRating = "";
+        }
+
     }
-    public Course(int courseNumber, String mnemonic, String title, double averageRating) {
+    public Course(int courseNumber, String mnemonic, String title,  double averageRating) {
         this.id = -999;
         this.courseNumber = courseNumber;
         this.mnemonic = mnemonic;
         this.title = title;
-        this.averageRating = df.format(averageRating);
+        if(averageRating != 0.0){
+            this.averageRating = df.format(averageRating);
+        }else{
+            this.averageRating = "";
+        }
     }
     public Course(int courseNumber, String mnemonic, String title) {
         //this.id = id;
         this.courseNumber = courseNumber;
         this.mnemonic = mnemonic;
         this.title = title;
-        this.averageRating = df.format(0.0);
+        this.averageRating = "";
     }
 
     public Course() { }
