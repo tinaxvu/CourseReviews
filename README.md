@@ -9,11 +9,9 @@
 
 ## To Run
 
-Run the main method in CourseReviewsApplication with the proper modules added for javaFX as specified by the assignment document
+Run the main method in the CourseReviewsApplication class with the following VM arguments to utilize JavaFX: --module-path [PATH_TO_JAVAFX_LIB_FOLDER] --add-modules javafx.controls,javafx.fxml.
 
 ## Contributions
-
-List the primary contributions of each author. It is recommended to update this with your contributions after each coding session.:
 
 ### Wadie Abboud
 
