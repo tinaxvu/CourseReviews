@@ -71,11 +71,11 @@
          <Font name="SansSerif Bold" size="16.0" />
       </font>
    </Button>
-   <Label fx:id="addSuccessLabel" layoutX="687.0" layoutY="160.0" prefHeight="15.0" prefWidth="141.0" text="AddSuccess" textFill="#03be0f" visible="false">
+   <Label fx:id="addSuccessLabel" layoutX="687.0" layoutY="160.0" prefHeight="15.0" prefWidth="314.0" text="AddSuccess" textFill="#03be0f" visible="false">
       <font>
          <Font name="SansSerif Bold" size="12.0" />
       </font></Label>
-   <Label fx:id="addErrorLabel" layoutX="679.0" layoutY="161.0" prefHeight="15.0" prefWidth="122.0" text="AddError" textFill="#f60200" visible="false">
+   <Label fx:id="addErrorLabel" layoutX="679.0" layoutY="161.0" prefHeight="15.0" prefWidth="255.0" text="AddError" textFill="#f60200" visible="false">
       <font>
          <Font name="SansSerif Bold" size="12.0" />
       </font></Label>

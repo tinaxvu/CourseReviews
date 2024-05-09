@@ -46,6 +46,11 @@ public class MyReviewsController {
         databaseDriver = driver;
         initializeColumns();
         loadReviews();
+        reviewTable.setRowFactory(tv -> {
+            TableRow<MyReviewObject> row = new TableRow<>();
+            row.prefHeightProperty().bind(reviewTable.heightProperty().divide(12));
+            return row ;
+        });
     }
 
     private void initializeColumns() {
