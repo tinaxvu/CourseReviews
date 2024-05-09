@@ -42,13 +42,10 @@ public class CourseSearchController {
 
     @FXML
     private TableView<Course> courseTable;
-
     @FXML
     private TableColumn<Course, String> courseTitleColumn;
     @FXML
     private TableColumn<Course, String> courseMnemonicColumn;
-    @FXML
-    private TableColumn<Course, Integer> courseIdColumn;
     @FXML
     private TableColumn<Course, Integer> courseNumberColumn;
     @FXML
@@ -65,7 +62,6 @@ public class CourseSearchController {
         courseMnemonicColumn.setCellValueFactory(new PropertyValueFactory<>("mnemonic"));
         courseNumberColumn.setCellValueFactory(new PropertyValueFactory<>("courseNumber"));
         courseRatingColumn.setCellValueFactory(new PropertyValueFactory<>("averageRating"));
-        courseIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         loadCourses();
     }
 

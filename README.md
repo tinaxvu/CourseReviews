@@ -5,11 +5,11 @@
 1) Wadie Abboud, ucu8tt, wadie-Abboud
 2) Tina Vu, kmp3xr, tinaxvu
 3) Andrew Wagner, htr6ff, htr6ff
-4) Name, netid, [GitHub profile name]
+4) Aiden Rocha, atx2xs, Aiden-Rocha09
 
 ## To Run
 
-[Add a brief description of which .java file to run, and what vm arguments are needed]
+Run the main method in CourseReviewsApplication with the proper modules added for javaFX as specified by the assignment document
 
 ## Contributions
 
@@ -36,11 +36,13 @@ List the primary contributions of each author. It is recommended to update this 
 * Handled bug fixes such as ensuring that rating in myReviews displayed as an int rather than a doubule
 * Handled majority of aesthetics changes throughout, ensuring scenes were usable and properly displayed appropriate error messages in the correct font and red/green color for error/success
 
-### [Author 4 - replace this with their name]
+### Aiden Rocha
 
-* Author 4 contributions
-* as a bulleted list
-* each line starts with an asterisk and a space
+* Designed the DB driver class and implemented several of the methods
+* Began the course search scene and implemented the table
+* Finished the implementation of MyReviewScene
+* Handled several type issues between model and controller
+* Bug fixes within the DB driver and throughout
 
 ## Issues
 
