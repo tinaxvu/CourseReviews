@@ -42,12 +42,12 @@
             <Font name="SansSerif Bold" size="12.0" />
          </font></Label>
 
-      <Text layoutX="710.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Average Rating:" wrappingWidth="222.0">
+      <Text layoutX="703.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Average Rating:" textAlignment="CENTER" wrappingWidth="222.0">
          <font>
             <Font name="SansSerif Bold" size="30.0" />
          </font>
       </Text>
-      <Label fx:id="averageRatingLabel" layoutX="933.0" layoutY="140.0" prefHeight="55.0" prefWidth="181.0">
+      <Label fx:id="averageRatingLabel" layoutX="924.0" layoutY="123.0" prefHeight="55.0" prefWidth="181.0">
          <font>
             <Font name="SansSerif Bold" size="30.0" />
          </font></Label>

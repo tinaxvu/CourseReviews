@@ -111,7 +111,12 @@ public class CourseReviewsSceneController {
             autoResizeColumns(reviewsTable);
             name.setText(selectedCourse.getMnemonic() + " " + selectedCourse.getCourseNumber() + ": " + selectedCourse.getTitle());
             name.setVisible(true);
-            averageRatingLabel.setText(String.format("%.2f", databaseDriver.getAverageRating(selectedCourse)) + "/5.00");
+            if (databaseDriver.getAverageRating(selectedCourse)>0.0) {
+                averageRatingLabel.setText(String.format("%.2f", databaseDriver.getAverageRating(selectedCourse)) + "/5.00");
+            }
+            else {
+                averageRatingLabel.setText("N/A");
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
