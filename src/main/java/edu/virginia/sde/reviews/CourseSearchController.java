@@ -243,7 +243,7 @@ public class CourseSearchController {
             stage.setScene(scene);
             stage.setTitle("Course Reviews");
         } catch (IndexOutOfBoundsException e) {
-            selectErrorLabel.setText("You need to select a course");
+            selectErrorLabel.setText("You need to select a course by clicking on a row in the table.");
             selectErrorLabel.setVisible(true);
         }
     }

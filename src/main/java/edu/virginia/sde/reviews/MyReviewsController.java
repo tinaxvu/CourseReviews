@@ -10,10 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
@@ -39,6 +36,9 @@ public class MyReviewsController {
 
     @FXML
     private Button backButton;
+
+    @FXML
+    private Label selectErrorLabel;
 
     private DatabaseDriver databaseDriver;
 
@@ -93,6 +93,10 @@ public class MyReviewsController {
             } catch (IOException | SQLException e) {
                 e.printStackTrace();
             }
+        }
+        else {
+            selectErrorLabel.setText("You need to select a review by clicking on a row in the table.");
+            selectErrorLabel.setVisible(true);
         }
     }
 

@@ -16,7 +16,7 @@
          </center>
          <top>
       
-            <Label prefHeight="165.0" prefWidth="464.0" text="   Course Reviews" BorderPane.alignment="CENTER">
+            <Label prefHeight="133.0" prefWidth="457.0" text="   Course Reviews" textAlignment="CENTER" BorderPane.alignment="CENTER">
                <font>
                   <Font name="SansSerif Bold" size="49.0" />
                </font>
