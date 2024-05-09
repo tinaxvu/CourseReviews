@@ -4,7 +4,7 @@
 ## Authors
 1) Wadie Abboud, ucu8tt, wadie-Abboud
 2) Tina Vu, kmp3xr, tinaxvu
-3) Name, netid, [GitHub profile name]
+3) Andrew Wagner, htr6ff, htr6ff
 4) Name, netid, [GitHub profile name]
 
 ## To Run
@@ -27,11 +27,14 @@ List the primary contributions of each author. It is recommended to update this 
 * Implemented CourseReviewsSceneController
 * Created course reviews scene
 
-### [Author 3 - replace this with their name]
+### Andrew Wagner
 
-* Author 3 contributions
-* as a bulleted list
-* each line starts with an asterisk and a space
+* Created login scene by implementing LoginSceneController and login-scene.fxml
+* Created my reviews scene by implementing MyReviewsController and my-reviews.fxml
+* Handled buttons for switching scenes such as handleClickToChangeToReviews and properly load/initialize the databse in MyReviewsController
+* Implemented methods such as getUserByUsername in DatabaseDriver
+* Handled bug fixes such as ensuring that rating in myReviews displayed as an int rather than a doubule
+* Handled majority of aesthetics changes throughout, ensuring scenes were usable and properly displayed appropriate error messages in the correct font and red/green color for error/success
 
 ### [Author 4 - replace this with their name]
 
