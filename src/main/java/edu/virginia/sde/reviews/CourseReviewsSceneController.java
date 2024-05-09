@@ -58,7 +58,7 @@ public class CourseReviewsSceneController {
     private TableColumn<Review, String> commentColumn;
 
     @FXML
-    private TableColumn<Review, Double> ratingColumn;
+    private TableColumn<Review, Integer> ratingColumn;
 
     @FXML
     private TableColumn<Review, Timestamp> timestampColumn;
