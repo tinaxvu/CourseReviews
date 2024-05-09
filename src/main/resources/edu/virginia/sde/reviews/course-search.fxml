@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.virginia.sde.reviews.CourseSearchController">
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.virginia.sde.reviews.CourseSearchController">
    <Label layoutX="509.0" layoutY="4.0" prefHeight="88.0" prefWidth="262.0" text="Course Search" textAlignment="CENTER" wrapText="true">
       <font>
          <Font name="SansSerif Bold" size="36.0" />
@@ -13,11 +17,10 @@
 
    <TableView fx:id="courseTable" layoutX="89.0" layoutY="362.0" prefHeight="292.0" prefWidth="1085.0">
      <columns>
-       <TableColumn fx:id="courseIdColumn" prefWidth="43.43871307373047" text="ID" />
          <TableColumn fx:id="courseMnemonicColumn" minWidth="9.959854125976562" prefWidth="169.672607421875" text="Mnemonic" />
          <TableColumn fx:id="courseTitleColumn" prefWidth="631.807373046875" text="Title" />
-       <TableColumn fx:id="courseNumberColumn" prefWidth="114.0189208984375" text="Number" />
-         <TableColumn fx:id="courseRatingColumn" prefWidth="116.333251953125" text="Average Rating" />
+       <TableColumn fx:id="courseNumberColumn" prefWidth="139.5" text="Number" />
+         <TableColumn fx:id="courseRatingColumn" prefWidth="142.5" text="Average Rating" />
      </columns>
    </TableView>
    <TextField fx:id="MnemonicAddField" layoutX="156.0" layoutY="157.0" prefWidth="83.0" promptText="Mnemonic">
