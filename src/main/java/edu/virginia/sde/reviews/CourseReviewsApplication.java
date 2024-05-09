@@ -5,17 +5,19 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class HelloWorldApplication extends Application {
+public class CourseReviewsApplication extends Application {
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("hello-world.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("login-scene.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Hello World");
+        stage.setTitle("Course Reviews");
         stage.setScene(scene);
         stage.show();
+        LoginSceneController controller = fxmlLoader.getController();
+        controller.getUsernameField().requestFocus();
     }
 }

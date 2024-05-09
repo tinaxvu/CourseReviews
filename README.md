@@ -2,42 +2,45 @@
 # Homework 6 - Course Review Application
 
 ## Authors
-1) Name, netid, [GitHub profile name]
-2) Name, netid, [GitHub profile name]
-3) Name, netid, [GitHub profile name]
-4) Name, netid, [GitHub profile name]
+1) Wadie Abboud, ucu8tt, wadie-Abboud
+2) Tina Vu, kmp3xr, tinaxvu
+3) Andrew Wagner, htr6ff, htr6ff
+4) Aiden Rocha, atx2xs, Aiden-Rocha09
 
 ## To Run
 
-[Add a brief description of which .java file to run, and what vm arguments are needed]
+Run the main method in the CourseReviewsApplication class with the following VM arguments to utilize JavaFX: --module-path [PATH_TO_JAVAFX_LIB_FOLDER] --add-modules javafx.controls,javafx.fxml.
 
 ## Contributions
 
-List the primary contributions of each author. It is recommended to update this with your contributions after each coding session.:
+### Wadie Abboud
 
-### [Author 1 - replace this with their name]
+* Tested all database driver methods
+* Implemented get course search methods
+* Created implemented course search scene
 
-* Author 1 contributions
-* as a bulleted list
-* each line starts with an asterisk and a space
+### Tina Vu
 
-### [Author 2 - replace this with their name]
+* Some database driver methods
+* Implemented CourseReviewsSceneController
+* Created course reviews scene
 
-* Author 2 contributions
-* as a bulleted list
-* each line starts with an asterisk and a space
+### Andrew Wagner
 
-### [Author 3 - replace this with their name]
+* Created login scene by implementing LoginSceneController and login-scene.fxml
+* Created my reviews scene by implementing MyReviewsController and my-reviews.fxml
+* Handled buttons for switching scenes such as handleClickToChangeToReviews and properly load/initialize the databse in MyReviewsController
+* Implemented methods such as getUserByUsername in DatabaseDriver
+* Handled bug fixes such as ensuring that rating in myReviews displayed as an int rather than a doubule
+* Handled majority of aesthetics changes throughout, ensuring scenes were usable and properly displayed appropriate error messages in the correct font and red/green color for error/success
 
-* Author 3 contributions
-* as a bulleted list
-* each line starts with an asterisk and a space
+### Aiden Rocha
 
-### [Author 4 - replace this with their name]
-
-* Author 4 contributions
-* as a bulleted list
-* each line starts with an asterisk and a space
+* Designed the DB driver class and implemented several of the methods
+* Began the course search scene and implemented the table
+* Finished the implementation of MyReviewScene
+* Handled several type issues between model and controller
+* Bug fixes within the DB driver and throughout
 
 ## Issues
 
