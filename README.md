@@ -29,18 +29,14 @@ Run the main method in the CourseReviewsApplication class with the following VM 
 
 * Created login scene by implementing LoginSceneController and login-scene.fxml
 * Created my reviews scene by implementing MyReviewsController and my-reviews.fxml
-* Handled buttons for switching scenes such as handleClickToChangeToReviews and properly load/initialize the databse in MyReviewsController
-* Implemented methods such as getUserByUsername in DatabaseDriver
-* Handled bug fixes such as ensuring that rating in myReviews displayed as an int rather than a doubule
-* Handled majority of aesthetics changes throughout, ensuring scenes were usable and properly displayed appropriate error messages in the correct font and red/green color for error/success
+* Handled majority of aesthetics changes
 
 ### Aiden Rocha
 
 * Designed the DB driver class and implemented several of the methods
 * Began the course search scene and implemented the table
 * Finished the implementation of MyReviewScene
-* Handled several type issues between model and controller
-* Bug fixes within the DB driver and throughout
+* Bug fixes
 
 ## Issues
 
