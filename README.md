@@ -1,11 +1,11 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/uwW2kZBL)
-# Homework 6 - Course Review Application
+Course Review Application
 
 ## Authors
-1) Wadie Abboud, ucu8tt, wadie-Abboud
-2) Tina Vu, kmp3xr, tinaxvu
-3) Andrew Wagner, htr6ff, htr6ff
-4) Aiden Rocha, atx2xs, Aiden-Rocha09
+1) Wadie Abboud, wadie-Abboud
+2) Tina Vu, tinaxvu
+3) Andrew Wagner, htr6ff
+4) Aiden Rocha, Aiden-Rocha09
 
 ## To Run
 
@@ -21,7 +21,7 @@ Run the main method in the CourseReviewsApplication class with the following VM 
 
 ### Tina Vu
 
-* Some database driver methods
+* Database driver methods
 * Implemented CourseReviewsSceneController
 * Created course reviews scene
 
@@ -37,7 +37,3 @@ Run the main method in the CourseReviewsApplication class with the following VM 
 * Began the course search scene and implemented the table
 * Finished the implementation of MyReviewScene
 * Bug fixes
-
-## Issues
-
-List any known issues (bugs, incorrect behavior, etc.) at the time of submission.
